@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import CardLogin from "./components/Login/CardLogin.vue";
+import CardLogin from "../components/Login/CardLogin.vue";
 export default {
   components: {
     CardLogin,

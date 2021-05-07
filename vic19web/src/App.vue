@@ -43,18 +43,19 @@
 
     <v-main>
       <br>
+        <router-view />
       <br>
       <br>
       <br>
-      <card-login title="Vic19" @dataVerified="ChangeRoute"></card-login>
+      <!-- <card-login title="Vic19" @dataVerified="ChangeRoute"></card-login> -->
       <!-- <login-page></login-page> -->
-     
+  
     </v-main>
   </v-app>
 </template>
 
 <script>
-import CardLogin from './components/Login/CardLogin.vue';
+// import CardLogin from './components/Login/CardLogin.vue';
 // import LoginPage from './views/LoginPage.vue';
 
 
@@ -63,7 +64,7 @@ export default {
 
   components: {
     // LoginPage,
-    CardLogin    
+    // CardLogin    
   },
 
   data: () => ({
