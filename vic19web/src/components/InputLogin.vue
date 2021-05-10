@@ -1,14 +1,11 @@
 <template>
-      <v-row
-              class="input-login">
-            <v-col cols="2"  class=" icon-card">
-                <v-icon class=" icon-card" >{{icon}}</v-icon>        
+      <v-row no-gutters>
+            <v-col cols="2" class="icon-card">
+                <v-icon class=" icon" >{{icon}}</v-icon>        
             </v-col>
-            <v-col cols="2"></v-col>
-
-            <v-col cols="8">
+            <v-col cols="10">
               <input
-                class="input-in center-card"
+                class="input-in"
 
                 
                 :placeholder="label"

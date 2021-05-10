@@ -12,12 +12,10 @@ export default {
 </script>
 
 <style lang="sass">
+*
 html
-  margin: 0 !important
-  padding: 0 !important
-html
-  width: 100%
-  height: 100%
+  margin: 0px !important
+  padding: 0px !important
 html
   overflow: hidden !important
   scrollbar-width: none
