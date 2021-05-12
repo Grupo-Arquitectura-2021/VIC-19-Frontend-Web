@@ -40,7 +40,7 @@
                   
                         <v-app-bar-nav-icon v-if="!$vuetify.breakpoint.mdAndUp" class="icon-app-bar" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
                     
-                        <h2 class="title-app-bar">Administrar Cuentas</h2>
+                        <h2 class="title-app-bar">{{title}}</h2>
                         <v-app-bar-nav-icon >
                             <v-icon  class="title-app-bar">mdi-account-circle-outline</v-icon>
                         </v-app-bar-nav-icon>
@@ -58,20 +58,24 @@ import router from '../router';
 export default {
     data:()=>({
         "drawer":null,
-        "menu":[]
+        "menu":[],
+        "title":""
     }),
     mounted () {
         this.menu=[
             {text:"Administrar Cuentas",icon:"mdi-account",path:"accounts"},
-            {text:"Administrar Datos",icon:"mdi-database",path:"data"},
-            {text:"Gestionar Locaciones",icon:"mdi-map-marker",path:"locations"},
-            {text:"Administrar Noticias",icon:"mdi-newspaper",path:"news"},
-            ]
+            {text:"Gestionar Datos",icon:"mdi-database",path:"data"},
+            {text:"Locaciones",icon:"mdi-map-marker",path:"locations"},
+            {text:"Adminsitrar Noticias",icon:"mdi-newspaper",path:"news"},
+            ],
+            this.title=router.currentRoute.name
+            
     },
     methods:{
         changeMenu(ruta){
-            router.push({path:ruta}).catch(()=>{});
-        }
+            router.push({path:ruta}).then(()=>{
+            this.title=router.currentRoute.name}).catch(()=>{});
+        },
     }
     
 }
