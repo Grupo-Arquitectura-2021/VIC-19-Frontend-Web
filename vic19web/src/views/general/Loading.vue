@@ -1,5 +1,6 @@
 <template>
-    <div class="main">
+    
+        <div class="main-loading">
         <v-progress-circular 
             size="70"
             class="progress"
@@ -21,12 +22,14 @@ export default ({
 </script>
 
 <style lang="sass" scoped>
-.main
+.main-loading
     background-color: rgba(0,0,0,0.6)
     width: 100vw
     height: 100vh
     text-align: center
-    position: relative
+    position: absolute !important
+    top: 0px !important
+    z-index: 100 !important
 .progress
     color:$color2 !important    
     top: 50% !important
@@ -38,7 +41,7 @@ export default ({
     width: 100%
     opacity: 0.9
     font-weight: 300
-    font-size: 1.2vw
+    font-size: 14pt
     top: 50% !important
     -ms-transform: translateY(-50%) !important
     transform: translateY(-50%) !important

@@ -4,7 +4,9 @@ import Login from '../views/Login.vue'
 import Home from '../views/Home.vue'
 import Accounts from '../views/home/Accounts'
 import Data from '../views/home/Data'
-import Locations from '../views/home/Locations'
+import Hospitals from '../views/home/Hospitals'
+import DrugStores from '../views/home/DrugStores'
+import Shelters from '../views/home/Shelters'
 import News from '../views/home/News'
 
 Vue.use(VueRouter)
@@ -32,9 +34,19 @@ const routes = [
         component: Data,
       },
       {
-        path: 'locations',
-        name: 'Gestionar Locaciones',
-        component: Locations,
+        path: 'hospitals',
+        name: 'Gestionar Hospitales',
+        component: Hospitals,
+      },
+      {
+        path: 'drugstores',
+        name: 'Gestionar Farmacias',
+        component: DrugStores,
+      },
+      {
+        path: 'shelters',
+        name: 'Gestionar Albergues',
+        component: Shelters,
       },
       {
         path: 'news',

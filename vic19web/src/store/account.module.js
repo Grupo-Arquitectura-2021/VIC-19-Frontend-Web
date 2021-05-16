@@ -7,10 +7,6 @@ const state={
   user: user?user:{},
 };
 const mutations= {
-    loginRequest(state, user) {
-        state.status = { loggingIn: true };
-        state.user = user;
-    },
     loginSuccess(state, user) {
         state.status = { loggedIn: true };
         state.user = user;
@@ -21,8 +17,8 @@ const mutations= {
     },
 };
 const actions={
-    login({ dispatch, commit }, loginRequest) {
-        commit('loginRequest', {email:loginRequest.email});
+    login({ dispatch, commit}, loginRequest) {
+        commit("general/changeLoading",{type:true,title:"Iniciando Sesión"});
         accountService.login(loginRequest)
             .then(
                 user => {

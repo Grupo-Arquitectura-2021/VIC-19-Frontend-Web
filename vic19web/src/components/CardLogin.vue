@@ -18,9 +18,8 @@
             sm="12"
             >      
                     <v-row  no-gutters class="header"></v-row>
-                    <v-row  no-gutters>
-                        <v-col  cols="4" lg="5" md="5" sm="5"></v-col>
-                        <v-col  cols="4" lg="2" md="2" sm="2">
+                    <v-row  no-gutters class="icon-center">
+                        <v-col  cols="2" lg="2" md="2" sm="2" class="icon">
                             <v-img src="@/assets/logo.png"></v-img>
                         </v-col>
                     </v-row>
@@ -92,7 +91,8 @@ import LoginRequest from '../models/LoginRequest'
 export default {
     components:{
         InputLogin,
-        ButtonLogin},
+        ButtonLogin
+        },
     data:()=>({        
         valid:false,
         year:new Date(Date.now()).getFullYear(),

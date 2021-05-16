@@ -1,7 +1,9 @@
 <template>
     <div>
     <router-view />
-    <Loading v-if="status.loggingIn" :label="'Iniciando Sesión'"></Loading></div>
+    <Loading v-if="loading" :label="label"></Loading>
+      
+    </div>
 </template>
 
 <script>
@@ -15,7 +17,7 @@ export default {
   },
   
     computed: {
-        ...mapState('account', ['status'])
+        ...mapState('general', ['loading','label']),
     },
 
 }

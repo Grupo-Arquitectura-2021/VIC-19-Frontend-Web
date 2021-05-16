@@ -1,0 +1,95 @@
+<template>
+  <v-container>
+    <v-row><br></v-row>
+    <v-row  class="header-container">
+      <v-col cols="12" lg="3" sm="4" md="4" xl="3" >
+        <v-btn class="button-add" v-on:click="addHospital">
+        <v-icon>mdi-plus</v-icon>Agregar Hospital</v-btn>
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col cols="12">
+        <Table :headers="headers"
+        :items="items"  
+        :total="totalHospitals"
+        @editValue="editHospital($event)"
+        @deleteValue="deleteHospital($event)"
+        @changePage="changePage($event)"
+        >
+
+      </Table>
+      </v-col>
+    </v-row>
+    <!-- <edit-account-dialog :active="activeEdit"></edit-account-dialog> -->
+  </v-container>
+</template>
+
+<script>
+import Table from '../../components/views-components/Table.vue';
+import { mapActions,mapState } from 'vuex'
+import Hospital from '../../models/Hospital'
+export default {
+  components: {
+    Table
+  },
+  data:()=>({
+    headers:[
+          { text: 'Id', value: 'idHospital',class:"item-header-left"},
+          { text: 'Ciudad', value: 'nameCity' ,class:"item-header-center"},
+          { text: 'Nombre', value: 'name' ,class:"item-header-center"},
+          { text: 'Latitud', value: 'lat' ,class:"item-header-center"},
+          {text: 'Longitud', value: 'lon' ,class:"item-header-right"},
+          {text: 'Acciones', value: 'actions' ,class:"item-header-right"}
+          ],
+    items:[],
+    activeEdit:false
+  }),
+  created(){
+    this.getHospitals({n:10,i:0});
+  },
+  mounted(){
+    this.obtainData()
+  },
+    computed: {
+        ...mapState('viewHospitals', ['hospitals','totalHospitals']),
+    },
+    
+    watch:{
+      hospitals(value){
+        this.items=value;
+      }
+    },
+  methods:{
+    ...mapActions('viewHospitals', ['dialogEditOpen','dialogDelete','getHospitals']),
+    deleteHospital(account){
+      console.log(account);
+    },
+    addHospital(){
+      this.dialogEditOpen({hospital:new Hospital(),title:"Agregar Hospital"})
+
+    },
+    editHospital(account){
+      this.dialogEditOpen({hospital:account,title:"Editar Hospital"})
+
+    },
+    obtainData(){
+      var data=[];
+      for(let i=0;i<10;i++){
+        data.push(new Hospital(i,"city","name",1.123,1.324));
+      }
+      this.items=data;
+    },
+    changePage(page){
+      this.getHospitals({n:10,i:10*page});
+    }
+  }
+
+}
+</script>
+
+<style lang="sass">
+@import "@/styles/views/_accounts.sass"  
+@import "@/styles/components/_table.sass"
+@import "@/styles/components/_buttons.sass"
+
+</style>

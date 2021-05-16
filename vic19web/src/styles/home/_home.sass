@@ -14,12 +14,7 @@
     background-color: $color2
 .drawer-items
     width: 100%
-    margin: -8px !important
     padding: 0px !important
-    position: absolute
-    top: 50%
-    -ms-transform: translateY(-50%)
-    transform: translateY(-50%)
 .drawer:before
   content: ""
   position: absolute
@@ -33,7 +28,11 @@
   backdrop-filter: blur(50px) 
   z-index: 0
   color: $color2
+.item-drawer  ::v-deep .v-list-group__header__append-icon .v-icon
+    color: $color2 !important
 
+.item-drawer  ::v-deep .v-list-group__header__prepend-icon .v-icon
+    color: $color2 !important
 .item-drawer
     color: $color2 !important  
     font-weight: 100 !important
@@ -42,21 +41,19 @@
     background-color: $color2-50 !important 
 .item-drawer-signout 
     bottom: 0px !important
-    margin: -8px !important
-    margin-bottom: 0px !important
     justify-content: space-evenly
-    height: 50px
-    border-radius: 0px !important
-    background-color: white !important
-    position: absolute
+    background-color: $color2-50 !important
+    box-shadow: none 
     width: 100%
+.divider
+    background-color: $color2-70
 .item-drawer-signout-label
-    color: $color4 !important  
-    font-weight: 500 !important
+    color: $color2 !important  
+    font-weight: 400 !important
     text-align: center   
-    font-size: 16px !important
+    font-size: 14px !important
 .item-drawer-signout-icon
-    color: $color4 !important  
+    color: $color2 !important  
 .item-drawer-text
     color: $color2 !important  
     font-weight: 100 !important
@@ -96,19 +93,16 @@
 .title-nav-container
     
     top: 0px !important
-    margin: -8px !important
-    margin-top: 0px !important
     border-radius: 0px !important
-    position: absolute !important
     width: 100% !important
     padding: 0px !important
-    background-color: $color2-50 !important
+    background-color: transparent !important
     box-shadow: none !important
     
 .title-logo-nav
-    width: 50px
 
-    
+.v-toolbar__content
+    padding: 0px !important
 .title-text-nav
     text-align: center   
     align-items: center

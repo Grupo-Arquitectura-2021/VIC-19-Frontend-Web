@@ -9,12 +9,14 @@
                 :permanent="$vuetify.breakpoint.mdAndUp">
                 <v-list  nav dense>                
                     <v-toolbar class="title-nav-container">
-                        <div class="title-logo-nav" ><v-img  class="title-logo-img-nav " src="@/assets/logo-white.png"></v-img></div>
-                        <div   class="title-text-nav"><h1 class="title-text-child-nav ">VIC 19</h1></div>
+                                <v-avatar><v-img  class="title-logo-nav " src="@/assets/logo-white.png"></v-img></v-avatar>
                     </v-toolbar> 
                     <v-list-item-group
                     active-class="white--text text--accent-5"
                     class="drawer-items">
+                        <v-list-item 
+                         >
+                        </v-list-item>
                         <v-list-item 
                         v-bind:key="index" 
                         v-for="(item, index) in menu" 
@@ -25,12 +27,41 @@
                                 <v-icon  class="item-drawer">{{item.icon}}</v-icon>
                             </v-list-item-icon>
                             <v-list-item-title   class="item-drawer-text">{{item.text}}</v-list-item-title>
+                        </v-list-item>    
+                        
+                        <v-list-group
+                            class="item-drawer"
+                            color="white"
+                            sub-group
+                            :value="showLocationMenu"
+                            prepend-icon="mdi-chevron-down"
+                             ><template v-slot:activator>
+                                <v-list-item-title  class="item-drawer-text">Locaciones</v-list-item-title>
+                            </template>
+                            <v-list-item
+                                link
+                                v-bind:key="index" 
+                                v-for="(item, index) in subLocationsMenu" 
+                                :class="'/home/'+item.path === $route.path ? 'item-drawer-active' : ''"
+                                v-on:click="changeMenu(item.path)"
+                                >
+                            <v-list-item-icon >
+                                <v-icon  class="item-drawer">{{item.icon}}</v-icon>
+                            </v-list-item-icon>
+                            <v-list-item-title   class="item-drawer-text">{{item.text}}</v-list-item-title>
+                        </v-list-item> 
+                        </v-list-group>                    
+                        <v-list-item >
+                            
+                        <v-divider class="divider"></v-divider>
+                        </v-list-item>
+                        <v-list-item class="item-drawer-signout" v-on:click="function(){}">
+                            <v-list-item-title   class="item-drawer-text">Cerrar Sesión</v-list-item-title>
+                            <v-list-item-icon >
+                                <v-icon class="item-drawer-signout-icon">mdi-exit-to-app</v-icon>
+                            </v-list-item-icon>
                         </v-list-item>
                     </v-list-item-group >
-                        <v-btn class="item-drawer-signout" v-on:click="function(){}">
-                            <h5 class="item-drawer-signout-label">salir</h5>
-                            <v-icon class="item-drawer-signout-icon">mdi-exit-to-app</v-icon>
-                        </v-btn>
                 </v-list>
             </v-navigation-drawer>
             <div class="container-side">
@@ -60,23 +91,52 @@ export default {
     data:()=>({
         "drawer":null,
         "menu":[],
-        "title":""
+        "title":"",
+        "subLocationsMenu":[],
+        "showLocationMenu":false
     }),
     mounted () {
         this.menu=[
             {text:"Administrar Cuentas",icon:"mdi-account",path:"accounts"},
             {text:"Gestionar Datos",icon:"mdi-database",path:"data"},
-            {text:"Locaciones",icon:"mdi-map-marker",path:"locations"},
             {text:"Administrar Noticias",icon:"mdi-newspaper",path:"news"},
-            ],
-            this.title=router.currentRoute.name
+            ];
+        this.subLocationsMenu=[
+            {text:"Gestionar Hospitales",icon:"mdi-hospital",path:"hospitals"},
+            {text:"Gestionar Farmacias",icon:"mdi-pharmacy",path:"drugstores"},
+            {text:"Gestionar Albergues",icon:"mdi-bed",path:"shelters"},]
+        this.title=router.currentRoute.name;
+        var ver=false;
+        for(let men of this.subLocationsMenu){
+            if('/home/'+men.path == router.currentRoute.path){
+                this.showLocationMenu=true;
+                ver=true;
+            }
+        }
+            console.log(this.showLocationMenu);
+        if(!ver){
+            this.showLocationMenu=false;
+        }
             
     },
     methods:{
         changeMenu(ruta){
             router.push({path:ruta}).then(()=>{
-            this.title=router.currentRoute.name}).catch(()=>{});
+            this.title=router.currentRoute.name;            
+            var ver=false;
+            for(let men of this.subLocationsMenu){
+                if(men.path == ruta){
+                    this.showLocationMenu=true;
+                    ver=true;
+                }
+            }
+            if(!ver){
+                this.showLocationMenu=false;
+            }
+            
+            }).catch(()=>{});
         },
+
     }
     
 }
