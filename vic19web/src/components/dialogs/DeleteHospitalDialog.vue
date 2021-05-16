@@ -2,17 +2,17 @@
     <v-col cols="6">
       <v-dialog
           persistent
-          v-model="dialogEditState"
+          v-model="dialogDeleteState"
           width="unset"
         >
         <v-card
           class="dialog-container">
             <v-card-title>
-              <span class="headline">Eliminar Cuenta</span>
+              <span class="headline">Eliminar Hospital</span>
             </v-card-title>
 
             <v-card-text>
-              Esta segura que desea eliminar la cuenta de{{accountEdit.name}}
+              Esta seguro que desea eliminar el hospital "{{hospital.name}}"
             </v-card-text>
 
             <v-card-actions>
@@ -29,7 +29,7 @@
                 text
                 @click="save"
               >
-                Guardar
+                Aceptar
               </v-btn>
             </v-card-actions>
           </v-card>
@@ -39,33 +39,36 @@
 </template>
 <script>
 import { mapState,mapActions} from 'vuex'
-import Account from '../../models/Account'
-import InputGeneral from '../inputs/InputGeneral.vue';
+import Hospital from '../../models/Hospital';
+
 
 export default {
-  components: { InputGeneral },
     props:{
     },
     data:()=>({       
         accountEdit:{},
+        hospitalEdit:{},
     }),
   
     computed: {
-        ...mapState('viewAccounts', ['dialogDeleteState','account'])
-    },
-    watch:{
-      account(value){
-        this.accountEdit=new Account(value.id,value.name,value.lastName,value.email);
-      }
+        ...mapState('viewHospitals', ['dialogDeleteState','hospital'])
     },
     mounted(){
     },
+    watch:{
+      hospital(value){
+        this.hospitalEdit=new Hospital(value.idHospital,value.idCity,value.name,value.lon,value.lat);
+        
+      }
+    },
     methods:{
-    ...mapActions('viewAccounts', ['dialogEditClose','dialogDelete']),
+    ...mapActions('viewHospitals', ['dialogDeleteClose','deleteHospital']),
       cancel(){
-        this.dialogEditClose();
+        this.dialogDeleteClose();
       },  
-      save(){}
+      save(){
+        this.dialogDeleteClose();
+        this.deleteHospital(this.hospitalEdit)}
     }
 }
 </script>

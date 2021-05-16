@@ -32,7 +32,8 @@
       </Table>
       </v-col>
     </v-row>
-    <!-- <edit-account-dialog :active="activeEdit"></edit-account-dialog> -->
+     <edit-hospital-dialog ></edit-hospital-dialog>
+     <delete-hospital-dialog></delete-hospital-dialog>
   </v-col>
   </v-row>
 </template>
@@ -42,10 +43,14 @@ import Table from '../../components/views-components/Table.vue';
 import { mapActions,mapState } from 'vuex'
 import Hospital from '../../models/Hospital'
 import InputSearch from '../../components/inputs/InputSearch.vue';
+import EditHospitalDialog from '../../components/dialogs/EditHospitalDialog.vue';
+import DeleteHospitalDialog from '../../components/dialogs/DeleteHospitalDialog';
 export default {
   components: {
     Table,
-    InputSearch
+    InputSearch,
+    EditHospitalDialog,
+    DeleteHospitalDialog
   },
   data:()=>({
     headers:[
@@ -58,33 +63,46 @@ export default {
           ],
     items:[],
     activeEdit:false,
-    search:""
+    search:"",
+    citiesData:[]
   }),
   created(){
+    this.getCities();
     this.getHospitals({n:10,i:0});
   },
   mounted(){
   },
     computed: {
-        ...mapState('viewHospitals', ['hospitals','totalHospitals']),
+        ...mapState('viewHospitals', ['hospitals','totalHospitals','cities']),
     },
     
     watch:{
       hospitals(value){
         this.items=value;
+        for(let h of this.hospitals){
+          this.citiesData.find((city)=>{
+            if(city.idCity==h.idCity){
+              h.nameCity=city.city;
+            }
+        })
+        }
+      },
+      cities(value){
+        this.citiesData=value;
       }
     },
   methods:{
-    ...mapActions('viewHospitals', ['dialogEditOpen','dialogDelete','getHospitals']),
-    deleteHospital(account){
-      console.log(account);
+    ...mapActions('viewHospitals', ['dialogEditOpen','dialogDeleteOpen','getHospitals','getCities']),
+    deleteHospital(hospital){
+      console.log(hospital);
+      this.dialogDeleteOpen(hospital)
     },
     addHospital(){
       this.dialogEditOpen({hospital:new Hospital(),title:"Agregar Hospital"})
 
     },
-    editHospital(account){
-      this.dialogEditOpen({hospital:account,title:"Editar Hospital"})
+    editHospital(hospital){
+      this.dialogEditOpen({hospital:hospital,title:"Editar Hospital"})
 
     },
     changePage(page){
