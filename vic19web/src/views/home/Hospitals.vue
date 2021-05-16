@@ -1,7 +1,19 @@
 <template>
-  <v-container>
+  <v-row class="main-container" no-gutters>
+    <v-col cols="11" xl="10" lg="10">
     <v-row><br></v-row>
     <v-row  class="header-container">
+      <v-col cols="12" lg="3" sm="4" md="4" xl="3" >
+        <input-search
+        :label="'Buscar Hospital'"
+        v-bind:value="search"
+        v-on:input="search = $event"   
+        @keyup.enter.native="searchData"  
+
+        
+        >
+        </input-search>
+      </v-col>
       <v-col cols="12" lg="3" sm="4" md="4" xl="3" >
         <v-btn class="button-add" v-on:click="addHospital">
         <v-icon>mdi-plus</v-icon>Agregar Hospital</v-btn>
@@ -21,16 +33,19 @@
       </v-col>
     </v-row>
     <!-- <edit-account-dialog :active="activeEdit"></edit-account-dialog> -->
-  </v-container>
+  </v-col>
+  </v-row>
 </template>
 
 <script>
 import Table from '../../components/views-components/Table.vue';
 import { mapActions,mapState } from 'vuex'
 import Hospital from '../../models/Hospital'
+import InputSearch from '../../components/inputs/InputSearch.vue';
 export default {
   components: {
-    Table
+    Table,
+    InputSearch
   },
   data:()=>({
     headers:[
@@ -42,13 +57,13 @@ export default {
           {text: 'Acciones', value: 'actions' ,class:"item-header-right"}
           ],
     items:[],
-    activeEdit:false
+    activeEdit:false,
+    search:""
   }),
   created(){
     this.getHospitals({n:10,i:0});
   },
   mounted(){
-    this.obtainData()
   },
     computed: {
         ...mapState('viewHospitals', ['hospitals','totalHospitals']),
@@ -72,15 +87,11 @@ export default {
       this.dialogEditOpen({hospital:account,title:"Editar Hospital"})
 
     },
-    obtainData(){
-      var data=[];
-      for(let i=0;i<10;i++){
-        data.push(new Hospital(i,"city","name",1.123,1.324));
-      }
-      this.items=data;
-    },
     changePage(page){
       this.getHospitals({n:10,i:10*page});
+    },
+    searchData(){
+      this.getHospitals({n:10,i:0,search:this.search});
     }
   }
 

@@ -47,7 +47,7 @@ const actions={
     },
     getHospitals({dispatch,commit},data){
         commit("general/changeLoading",{type:true,label:"Obteniendo Hospitales"},  { root: true });
-        hospitalService.getHospitals(data.n,data.i)
+        hospitalService.getHospitals(data.n,data.i,data.search)
         .then(
             data => {
                 commit('getHospitalsOk', {hospitals:data.hospitals,totalHospitals:data.total});
