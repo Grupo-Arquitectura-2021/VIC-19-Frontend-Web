@@ -82,7 +82,7 @@ export default {
         for(let s of this.shelters){
           this.citiesData.find((city)=>{
             if(city.idCity==s.idCity){
-              h.nameCity=city.city;
+              s.nameCity=city.city;
             }
         })
         }
