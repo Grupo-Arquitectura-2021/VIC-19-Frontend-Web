@@ -16,5 +16,5 @@ export default {
 </script>
 
 <style scoped lang="sass">
-@import "@/assets/sass/Login/_buttonLogin.sass"  
+@import "@/styles/login/_buttonLogin.sass"  
 </style>

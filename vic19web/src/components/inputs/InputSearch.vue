@@ -1,14 +1,12 @@
 <template>
-      <v-row no-gutters>
+      <div>
+        <v-row no-gutters>
             <v-col cols="2" class="icon-card">
-                <v-icon class=" icon" >{{icon}}</v-icon>        
+                <v-icon class=" icon" >mdi-magnify</v-icon>        
             </v-col>
             <v-col cols="10">
               <div class="input">
                 <v-text-field
-              
-                
-                dark
                 dense
                 class="input-in"
                 v-bind:value="value" 
@@ -17,13 +15,13 @@
                 outlined
                 :label="label"
                 :type="type"
-                :rules="rules"
                 :minlength="lim"
                 :autocomplete="auto"
               />
               </div>
             </v-col>
       </v-row>
+      </div>
     
 </template>
 
@@ -33,14 +31,12 @@ export default {
 
     props:{
         "label":{type:String,default:"input"},
-        "icon":{type:String,default:"mdi-map-marker"},
         "type":{type:String,default:"text"},
         "lim":{type:String,default:"1"},
-        "auto":{type:String,default:"username"},
-        "rules":{},
+        "auto":{type:String,default:""},
+        value:{}
     },
     data:()=>({
-      value:""
     }),
     methods:{
       input(value){
@@ -51,5 +47,5 @@ export default {
 </script>
 
 <style scoped lang="sass">
-@import "@/styles/login/_inputLogin.sass"  
+@import "@/styles/general/_input-search.sass"  
 </style>

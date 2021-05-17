@@ -1,13 +1,13 @@
 <template>
-      <v-row no-gutters>
+      <div>
+        <v-row no-gutters class="label">{{label}}</v-row>
+        <v-row no-gutters>
             <v-col cols="2" class="icon-card">
                 <v-icon class=" icon" >{{icon}}</v-icon>        
             </v-col>
             <v-col cols="10">
               <div class="input">
                 <v-text-field
-              
-                
                 dark
                 dense
                 class="input-in"
@@ -24,6 +24,7 @@
               </div>
             </v-col>
       </v-row>
+      </div>
     
 </template>
 
@@ -36,11 +37,11 @@ export default {
         "icon":{type:String,default:"mdi-map-marker"},
         "type":{type:String,default:"text"},
         "lim":{type:String,default:"1"},
-        "auto":{type:String,default:"username"},
+        "auto":{type:String,default:""},
         "rules":{},
+          value:{}
     },
     data:()=>({
-      value:""
     }),
     methods:{
       input(value){
@@ -51,5 +52,5 @@ export default {
 </script>
 
 <style scoped lang="sass">
-@import "@/styles/login/_inputLogin.sass"  
+@import "@/styles/general/_input-general.sass"  
 </style>
