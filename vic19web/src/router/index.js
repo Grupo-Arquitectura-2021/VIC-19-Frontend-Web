@@ -8,12 +8,13 @@ import Hospitals from '../views/home/Hospitals'
 import DrugStores from '../views/home/DrugStores'
 import Shelters from '../views/home/Shelters'
 import News from '../views/home/News'
+import {tokenLib} from '../lib/token.lib'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/',
+    path: '/login',
     name: 'Login',
     component: Login,
   },
@@ -53,15 +54,32 @@ const routes = [
         name: 'Administrar Noticias',
         component: News,
       },
+      { path: '*', redirect: '/home/accounts' }
 
     ]
   },
+  { path: '*', redirect: '/home/accounts' }
 ]
 
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
+})
+router.beforeEach((to, _, next) => {
+  const publicPages = ['/login'];
+  const authRequired = !publicPages.includes(to.path);
+  const token=tokenLib.getToken()
+
+  if (authRequired && !token) {
+    return next('/login');
+  }
+  else if(token&&!authRequired){
+    return next("/home")
+  }
+  else{
+  next();
+  }
 })
 
 export default router

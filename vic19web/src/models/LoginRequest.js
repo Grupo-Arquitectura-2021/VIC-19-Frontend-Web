@@ -8,7 +8,11 @@ export default class LoginRequest
         this.password=password;
     }
     toJson(){
-        return JSON.stringify(this);
+        const params = new URLSearchParams()
+        params.append('password', this.password)
+        params.append('username', this.email)
+        params.append('grant_type', 'password')
+        return params;
     }
     fromJson(json){
         this.email=json.email;
