@@ -1,6 +1,5 @@
 import {apiUrl} from '../config/config';
 import axios from 'axios'
-import User from '../models/User'
 export const accountService = {
     login
 };
@@ -8,23 +7,25 @@ async function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
 async function login(loginRequest) {
-    console.log(loginRequest.toJson());
-    
     await sleep(2000);
     return axios({
-        url: `${apiUrl}user/login`, 
-        data: loginRequest.toJson(),
+        url: `${apiUrl}oauth/token`, 
+        params:loginRequest.toJson(),
         method: "POST",
-        headers: { "Content-Type": 'application/json' },
+        headers: { 'content-type': 'application/x-www-form-urlencoded;charset=utf-8' ,"Authorization":'Basic Y292aWQxOXByb3llY3Q6Y292aWQxOXByb3llY3QxMjM0NQ=='},
         
       })
         .then(data => {
+            console.log(data);
             if(data.status==200){
-                var user=new User().fromJson(data.data);
-                return user;
+                localStorage.setItem("token",data.data.access_token)
+                localStorage.setItem("token_refresh",data.data.refresh_token)
+                return true;
             }
             else{
-                return null;
+                throw "error";
             }
-        }).catch(()=>{return null});
+        }).catch((error)=>{
+            console.log(error);
+            throw error;});
 }

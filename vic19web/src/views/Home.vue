@@ -32,10 +32,13 @@
                         <v-list-group
                             class="item-drawer"
                             color="white"
-                            sub-group
+                            group
                             :value="showLocationMenu"
-                            prepend-icon="mdi-chevron-down"
-                             ><template v-slot:activator>
+                             >
+                             <template v-slot:activator>
+                                <v-list-item-icon >
+                                    <v-icon  class="item-drawer">mdi-map-marker</v-icon>
+                                </v-list-item-icon>
                                 <v-list-item-title  class="item-drawer-text">Locaciones</v-list-item-title>
                             </template>
                             <v-list-item
@@ -46,7 +49,7 @@
                                 v-on:click="changeMenu(item.path)"
                                 >
                             <v-list-item-icon >
-                                <v-icon  class="item-drawer">{{item.icon}}</v-icon>
+                                <v-icon  class="item-drawer-sub">{{item.icon}}</v-icon>
                             </v-list-item-icon>
                             <v-list-item-title   class="item-drawer-text">{{item.text}}</v-list-item-title>
                         </v-list-item> 
@@ -55,7 +58,7 @@
                             
                         <v-divider class="divider"></v-divider>
                         </v-list-item>
-                        <v-list-item class="item-drawer-signout" v-on:click="function(){}">
+                        <v-list-item class="item-drawer-signout" v-on:click="logout()">
                             <v-list-item-title   class="item-drawer-text">Cerrar Sesión</v-list-item-title>
                             <v-list-item-icon >
                                 <v-icon class="item-drawer-signout-icon">mdi-exit-to-app</v-icon>
@@ -86,6 +89,7 @@
     </v-app>
 </template>
 <script>
+import { mapActions } from 'vuex';
 import router from '../router';
 export default {
     data:()=>({
@@ -113,13 +117,13 @@ export default {
                 ver=true;
             }
         }
-            console.log(this.showLocationMenu);
         if(!ver){
             this.showLocationMenu=false;
         }
             
     },
     methods:{
+        ...mapActions('account', ['logout']),
         changeMenu(ruta){
             router.push({path:ruta}).then(()=>{
             this.title=router.currentRoute.name;            

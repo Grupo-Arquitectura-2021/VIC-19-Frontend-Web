@@ -34,9 +34,10 @@ async function getHospitals(n,i,search) {
                 return {hospitals:hospitals,total:data.data.total};
             }
             else{
-                return null;
+                throw "error";
             }
-        }).catch(()=>{return null});
+        }).catch(()=>{
+            throw "error";});
 }
 async function editHospital(hospital) {
     await sleep(2000);

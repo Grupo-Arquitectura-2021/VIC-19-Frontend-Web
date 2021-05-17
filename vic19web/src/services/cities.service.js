@@ -26,7 +26,8 @@ async function getCities() {
                 return cities;
             }
             else{
-                return null;
+                throw "error";
             }
-        }).catch(()=>{return null});
+        }).catch(()=>{
+            throw "error";});
 }
