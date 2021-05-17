@@ -4,7 +4,7 @@
             <div class="icon-container">
                 <v-icon class=" icon" >mdi-magnify</v-icon>        
             </div>
-            <v-col cols="10">
+            <v-col>
               <div class="input">
                 <v-text-field
                 dense
