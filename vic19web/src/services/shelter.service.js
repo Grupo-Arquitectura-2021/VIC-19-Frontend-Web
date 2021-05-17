@@ -24,10 +24,11 @@ async function getShelters(n,i,search) {
         
       })
         .then(data => {
+            console.log(data);
             if(data.status==200){
                 var shelters=[];
                 for(var s of data.data.shelters){               
-                    var shelter=new Hospital().fromJson(s);
+                    var shelter=new Shelter().fromJson(s);
                     shelters.push(shelter);
                 }
 
@@ -61,7 +62,7 @@ async function addShelter(shelter) {
     return axios({
         url: `${apiUrl}shelter/addShelter`,
         method: "POST",
-        data:hospital.toJson(),
+        data:shelter.toJson(),
         headers: { "Content-Type": 'application/json' },
         
       })
@@ -80,7 +81,7 @@ async function deleteShelter(shelter) {
     return axios({
         url: `${apiUrl}shelter/deleteShelter`,
         method: "PUT",
-        data:hospital.toJson(),
+        data:shelter.toJson(),
         headers: { "Content-Type": 'application/json' },
         
       })

@@ -68,7 +68,7 @@
                   <select-general 
                   :items="cities"
                   :label="'Ciudad'"
-                    v-bind:value="shellterEdit.idCity"
+                    v-bind:value="shelterEdit.idCity"
                     v-on:input="shelterEdit.idCity = $event"  
                   ></select-general>
                   </v-col>
