@@ -44,7 +44,9 @@ const mutations= {
     },
     editShelterOk(state,data){
         state.shelter.idShelter=data.idShelter;
+        state.shelter.nameCity=data.nameCity;
         state.shelter.name=data.name;
+        state.shelter.amount=data.amount;
         state.shelter.lon=data.lon;
         state.shelter.lat=data.lat;
         state.shelter.idCity=data.idCity;
