@@ -36,6 +36,21 @@
                     lg="6"
                   >
                   <input-general                  
+                    v-bind:value="shelterEdit.amount"
+                    v-on:input="shelterEdit.amount = $event"   
+                    :icon="'mdi-pencil'"
+                    :label="'Capacidad'"
+                    :lim="'6'"
+                    :rules="[rules.Required]"
+                    ></input-general>
+                  </v-col>
+                  <v-col
+                    cols="12"
+                    sm="6"
+                    md="4"
+                    lg="6"
+                  >
+                  <input-general                  
                     v-bind:value="shelterEdit.lon"
                     v-on:input="shelterEdit.lon = $event"   
                     :icon="'mdi-map-marker'"
@@ -50,6 +65,7 @@
                     md="4"
                     lg="6"
                   >
+                  
                   <input-general                  
                     v-bind:value="shelterEdit.lat"
                     v-on:input="shelterEdit.lat = $event"   
@@ -122,7 +138,7 @@ export default {
     },
     watch:{
       shelter(value){
-        this.shelterEdit=new Shelter(value.idShelter,value.idCity,value.name,value.lon,value.lat);
+        this.shelterEdit=new Shelter(value.idShelter,value.idCity,value.name,value.amount,value.lon,value.lat);
         
       }
     },
@@ -152,3 +168,4 @@ export default {
 <style lang="sass">
 @import "@/styles/dialogs/_editAccountDialog.sass"    
 </style>
+
