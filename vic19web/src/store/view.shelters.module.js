@@ -44,17 +44,18 @@ const mutations= {
     },
     editShelterOk(state,data){
         state.shelter.idShelter=data.idShelter;
-        state.shelter.nameCity=data.nameCity;
         state.shelter.name=data.name;
-        state.shelter.amount=data.amount;
         state.shelter.lon=data.lon;
         state.shelter.lat=data.lat;
         state.shelter.idCity=data.idCity;
+        var index=state.shelters.findIndex(v => v.idShelter === data.idShelter);
+        state.shelters.splice(index, 1);        
         for(let city of state.cities){
             if(city.idCity==data.idCity){
-                state.shelter.nameCity=city.city
+                data.nameCity=city.city
             }
         }
+        state.shelters.splice(index, 0, data);
     },
     
     deleteShelterOk(state,data){

@@ -57,7 +57,7 @@ export default {
     },
     watch:{
       shelter(value){
-        this.shelterEdit=new Shelter(value.idShelter,value.idCity,value.name,value.lon,value.lat);
+        this.shelterEdit=new Shelter(value.idShelter,value.amount,value.idCity,value.name,value.lon,value.lat);
         
       }
     },

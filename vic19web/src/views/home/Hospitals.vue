@@ -73,11 +73,12 @@ export default {
   mounted(){
   },
     computed: {
-        ...mapState('viewHospitals', ['hospitals','totalHospitals','cities']),
+        ...mapState('viewHospitals', ['hospitals','totalHospitals','cities','hospital']),
     },
     
     watch:{
       hospitals(value){
+        console.log(value);
         this.items=value;
         for(let h of this.hospitals){
           this.citiesData.find((city)=>{

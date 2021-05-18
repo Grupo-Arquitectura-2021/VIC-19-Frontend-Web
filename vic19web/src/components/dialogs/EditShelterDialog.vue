@@ -138,7 +138,7 @@ export default {
     },
     watch:{
       shelter(value){
-        this.shelterEdit=new Shelter(value.idShelter,value.idCity,value.name,value.amount,value.lon,value.lat);
+        this.shelterEdit=new Shelter(value.idShelter,value.amount,value.idCity,value.name,value.lon,value.lat);
         
       }
     },
@@ -150,7 +150,6 @@ export default {
         this.dialogEditClose();
       },  
       save(){
-        console.log(this.title);
         switch(this.title){
           case "Editar Albergue":
             this.dialogEditClose();
