@@ -7,6 +7,7 @@ import { viewAccounts } from './view.accounts.module';
 import { viewHospitals } from './view.hospitals.module';
 import { viewNewsList } from './view.news.module';
 import { viewShelters } from './view.shelters.module';
+import { viewDrugstores } from './view.drugstores.module';
 
 Vue.use(Vuex);
 
