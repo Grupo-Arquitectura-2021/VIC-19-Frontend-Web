@@ -1,14 +1,14 @@
 export default class Drugstore
 {
-    idDrugtore;
+    idDrugstore;
     idCity;
     nameCity;
     name;
     lon;
     lat;
 
-    constructor(idDrugtore,idCity,name,lon,lat,nameCity){
-        this.idDrugtore=idDrugtore;
+    constructor(idDrugstore,idCity,name,lon,lat,nameCity){
+        this.idDrugstore=idDrugstore;
         this.idCity=idCity;
         this.name=name;
         this.lon=lon;
@@ -19,9 +19,9 @@ export default class Drugstore
     toJson(){
         return JSON.stringify(this);
     }
-    
+
     fromJson(json){
-        this.idDrugtore=json.idDrugtore;
+        this.idDrugstore=json.idDrugstore;
         this.idCity=json.idCity;
         this.name=json.name;
         this.lon=json.lon;

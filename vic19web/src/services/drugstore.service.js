@@ -79,7 +79,7 @@ async function deleteDrugstore(drugstore) {
     console.log(drugstore.toJson())
     await sleep(2000);
     return axios({
-        url: `${apiUrl}drugstore/deleteDrugstore`,
+        url: `${apiUrl}drugstore/deleteDrugstore?`,
         method: "PUT",
         data:drugstore.toJson(),
         headers: { "Content-Type": 'application/json' },
