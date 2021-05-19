@@ -76,11 +76,13 @@ async function addDrugstore(drugstore) {
         }).catch(()=>{return null});
 }
 async function deleteDrugstore(drugstore) {
+    var complement = "";
+    complement= `drugstoreId=${drugstore.idDrugstore}`
     console.log(drugstore.toJson())
     await sleep(2000);
     return axios({
-        url: `${apiUrl}drugstore/deleteDrugstore?`,
-        method: "PUT",
+        url: `${apiUrl}drugstore/deleteDrugstore?`+complement,
+        method: "DELETE",
         data:drugstore.toJson(),
         headers: { "Content-Type": 'application/json' },
         
