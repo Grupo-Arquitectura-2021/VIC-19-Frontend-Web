@@ -5,7 +5,7 @@ import Home from '../views/Home.vue'
 import Accounts from '../views/home/Accounts'
 import Data from '../views/home/Data'
 import Hospitals from '../views/home/Hospitals'
-import DrugStores from '../views/home/DrugStores'
+import Drugstores from '../views/home/Drugstores'
 import Shelters from '../views/home/Shelters'
 import News from '../views/home/News'
 import {tokenLib} from '../lib/token.lib'
@@ -42,7 +42,7 @@ const routes = [
       {
         path: 'drugstores',
         name: 'Gestionar Farmacias',
-        component: DrugStores,
+        component: Drugstores,
       },
       {
         path: 'shelters',

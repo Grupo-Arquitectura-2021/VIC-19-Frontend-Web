@@ -3,4 +3,5 @@ export * from './hospital.service';
 export * from './news.service';
 export * from './cities.service';
 export * from './shelter.service';
+export * from './drugstore.service';
 import './config.service';

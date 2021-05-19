@@ -16,6 +16,7 @@ export const store = new Vuex.Store({
         viewAccounts,
         viewNewsList,
         viewHospitals,
+        viewDrugstores,
         viewShelters,
         general
     }
