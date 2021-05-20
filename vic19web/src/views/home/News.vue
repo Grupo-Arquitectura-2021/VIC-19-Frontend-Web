@@ -25,15 +25,15 @@
         :items="newsList"  
         :total="totalNews"
         @editValue="editHospital($event)"
-        @deleteValue="deleteHospital($event)"
+        @deleteValue="deleteNews($event)"
         @changePage="changePage($event)"
         >
 
       </Table>
       </v-col>
     </v-row>
-     <edit-hospital-dialog ></edit-hospital-dialog>
-     <delete-hospital-dialog></delete-hospital-dialog>
+     <edit-news-dialog ></edit-news-dialog>
+     <delete-news-dialog></delete-news-dialog>
   </v-col>
   </v-row>
 </template>
@@ -43,14 +43,14 @@ import Table from '../../components/views-components/Table.vue';
 import { mapActions,mapState } from 'vuex'
 import News from '../../models/News'
 import InputSearch from '../../components/inputs/InputSearch.vue';
-import EditHospitalDialog from '../../components/dialogs/EditHospitalDialog.vue';
-import DeleteHospitalDialog from '../../components/dialogs/DeleteHospitalDialog';
+import EditNewsDialog from '../../components/dialogs/EditNewsDialog.vue';
+import DeleteNewsDialog from '../../components/dialogs/DeleteNewsDialog';
 export default {
   components: {
     Table,
     InputSearch,
-    EditHospitalDialog,
-    DeleteHospitalDialog
+    EditNewsDialog,
+    DeleteNewsDialog
   },
   data:()=>({
     headers:[
@@ -81,9 +81,9 @@ export default {
     },
   methods:{
     ...mapActions('viewNewsList', ['dialogEditOpen','dialogDeleteOpen','getNews']),
-    deleteHospital(hospital){
-      console.log(hospital);
-      this.dialogDeleteOpen(hospital)
+    deleteNews(news){
+      console.log(news);
+      this.dialogDeleteOpen(news)
     },
     addHospital(){
       this.dialogEditOpen({news:new News(),title:"Agregar Noticia"})

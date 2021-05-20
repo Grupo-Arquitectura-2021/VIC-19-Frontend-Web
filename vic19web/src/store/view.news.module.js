@@ -114,6 +114,7 @@ const actions={
             }
         );
     },
+    */
     deleteNews({dispatch,commit},news){
         commit("general/changeLoading",{type:true,label:"Eliminando news"},  { root: true });
         newsService.deleteNews(news)
@@ -128,7 +129,7 @@ const actions={
             }
         );
     },
-    */
+    
     
 };
 

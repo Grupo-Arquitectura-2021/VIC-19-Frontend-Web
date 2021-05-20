@@ -2,10 +2,10 @@ import {apiUrl} from '../config/config';
 import axios from 'axios'
 import News from '../models/News'
 export const newsService = {
-    getNews
+    getNews,
     //editNews,
     //addNews,
-    //deleteNews
+    deleteNews
 };
 async function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
@@ -38,4 +38,23 @@ async function getNews(n,i,search) {
             }
         }).catch(()=>{
             throw "error";});
+}
+async function deleteNews(news) {
+    console.log(news.toJson())
+    await sleep(2000);
+    return axios({
+        url: `${apiUrl}news/deleteNews`,
+        method: "PUT",
+        data:news.toJson(),
+        headers: { "Content-Type": 'application/json' },
+        
+      })
+        .then(data => {
+            if(data.status==200){
+                return true;
+            }
+            else{
+                return null;
+            }
+        }).catch(()=>{return null});
 }
