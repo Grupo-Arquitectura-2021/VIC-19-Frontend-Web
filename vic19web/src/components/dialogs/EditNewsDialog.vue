@@ -24,7 +24,7 @@
                     v-bind:value="NewsEdit.name"
                     v-on:input="NewsEdit.name = $event"   
                     :icon="'mdi-pencil'"
-                    :label="'Nombre'"
+                    :label="'Titulo'"
                     :lim="'6'"
                     :rules="[rules.Required]"
                     ></input-general>
@@ -38,8 +38,8 @@
                   <input-general                  
                     v-bind:value="NewsEdit.lon"
                     v-on:input="NewsEdit.lon = $event"   
-                    :icon="'mdi-map-marker'"
-                    :label="'Longitud'"
+                    :icon="'mdi-format-align-justify'"
+                    :label="'Contenido'"
                     :lim="'6'"
                     :rules="[rules.Required]"
                     ></input-general>
@@ -53,8 +53,8 @@
                   <input-general                  
                     v-bind:value="NewsEdit.lat"
                     v-on:input="NewsEdit.lat = $event"   
-                    :icon="'mdi-map-marker'"
-                    :label="'Latitud'"
+                    :icon="'mdi-update'"
+                    :label="'Fecha de publicacion'"
                     :lim="'6'"
                     :rules="[rules.Required]"
                     ></input-general>
@@ -65,12 +65,14 @@
                     md="4"
                     lg="6"
                   >
-                  <select-general 
-                  :items="cities"
-                  :label="'Ciudad'"
-                    v-bind:value="NewsEdit.idCity"
-                    v-on:input="NewsEdit.idCity = $event"  
-                  ></select-general>
+                  <input-general                  
+                    v-bind:value="NewsEdit.lat"
+                    v-on:input="NewsEdit.lat = $event"   
+                    :icon="'mdi-image'"
+                    :label="'URL Imagen'"
+                    :lim="'6'"
+                    :rules="[rules.Required]"
+                    ></input-general>
                   </v-col>
                   <v-col
                     cols="12"
@@ -81,8 +83,8 @@
                   <input-general                  
                     v-bind:value="NewsEdit.lon"
                     v-on:input="NewsEdit.title = $event"   
-                    :icon="'mdi-map-marker'"
-                    :label="'Titulo'"
+                    :icon="'mdi-newspaper'"
+                    :label="'Direccion de la noticia'"
                     :lim="'6'"
                     :rules="[rules.Required]"
                     ></input-general>
@@ -117,10 +119,9 @@
 import { mapState,mapActions} from 'vuex'
 import News from '../../models/News'
 import InputGeneral from '../inputs/InputGeneral.vue';
-import SelectGeneral from '../inputs/selectGeneral.vue';
 
 export default {
-  components: { InputGeneral, SelectGeneral },
+  components: { InputGeneral},
     props:{
     },
     data:()=>({        
