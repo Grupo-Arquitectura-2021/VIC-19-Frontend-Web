@@ -51,8 +51,8 @@
                     lg="6"
                   >
                   <input-general                  
-                    v-bind:value="hospitalEdit.lat"
-                    v-on:input="hospitalEdit.lat = $event"   
+                    v-bind:value="NewsEdit.lat"
+                    v-on:input="NewsEdit.lat = $event"   
                     :icon="'mdi-map-marker'"
                     :label="'Latitud'"
                     :lim="'6'"
@@ -68,9 +68,24 @@
                   <select-general 
                   :items="cities"
                   :label="'Ciudad'"
-                    v-bind:value="hospitalEdit.idCity"
-                    v-on:input="hospitalEdit.idCity = $event"  
+                    v-bind:value="NewsEdit.idCity"
+                    v-on:input="NewsEdit.idCity = $event"  
                   ></select-general>
+                  </v-col>
+                  <v-col
+                    cols="12"
+                    sm="6"
+                    md="4"
+                    lg="6"
+                  >
+                  <input-general                  
+                    v-bind:value="NewsEdit.lon"
+                    v-on:input="NewsEdit.title = $event"   
+                    :icon="'mdi-map-marker'"
+                    :label="'Titulo'"
+                    :lim="'6'"
+                    :rules="[rules.Required]"
+                    ></input-general>
                   </v-col>
                 </v-row>
               </v-container>
@@ -100,7 +115,7 @@
 </template>
 <script>
 import { mapState,mapActions} from 'vuex'
-import Hospital from '../../models/Hospital'
+import News from '../../models/News'
 import InputGeneral from '../inputs/InputGeneral.vue';
 import SelectGeneral from '../inputs/selectGeneral.vue';
 
@@ -110,7 +125,7 @@ export default {
     },
     data:()=>({        
         active:true,
-        hospitalEdit:{},
+        NewsEdit:{},
         rules: {
             Required: (value) =>
                 !!value || "Complete el campo por favor."
@@ -118,31 +133,31 @@ export default {
     }),
   
     computed: {
-        ...mapState('viewHospitals', ['dialogEditState','hospital','title','cities'])
+        ...mapState('viewNewsList', ['dialogEditState','News','title'])
     },
     watch:{
-      hospital(value){
-        this.hospitalEdit=new Hospital(value.idHospital,value.idCity,value.name,value.lon,value.lat);
+      news(value){
+        this.newsEdit=new News(value.idNews,value.title,value.content,value.dateNews,value.urlImage,value.source);
         
       }
     },
     mounted(){
     },
     methods:{
-    ...mapActions('viewHospitals', ['dialogEditClose','dialogDelete','editHospital','addHospital']),
+    ...mapActions('viewNewsList', ['dialogEditClose','dialogDelete','editNews','addNews']),
       cancel(){
         this.dialogEditClose();
       },  
       save(){
         console.log(this.title);
         switch(this.title){
-          case "Editar Hospital":
+          case "Editar Noticia":
             this.dialogEditClose();
-            this.editHospital(this.hospitalEdit);
+            this.editNews(this.newsEdit);
             break;
-          case "Agregar Hospital":
+          case "Agregar Noticia":
              this.dialogEditClose();   
-            this.addHospital(this.hospitalEdit);
+            this.addNews(this.newsEdit);
             break;  
         }
       }

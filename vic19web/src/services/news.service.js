@@ -18,7 +18,7 @@ async function getNews(n,i,search) {
     complement=`n=${n}&i=${i}&search=${search}`
     await sleep(2000);
     return axios({
-        url: `${apiUrl}news/list?`+complement, 
+        url: `${apiUrl}news?`+complement, 
         method: "GET",
         headers: { "Content-Type": 'application/json' },
         

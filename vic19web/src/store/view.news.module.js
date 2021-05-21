@@ -84,7 +84,6 @@ const actions={
             }
         );
     },
-    /*
     editNews({dispatch,commit},news){
         commit("general/changeLoading",{type:true,label:"Modificando news"},  { root: true });
         newsService.editNews(news)
@@ -99,6 +98,7 @@ const actions={
             }
         );
     },
+    /*
     addNews({dispatch,commit},news){
         commit("general/changeLoading",{type:true,label:"Agregando news"},  { root: true });
         newsService.addNews(news)
