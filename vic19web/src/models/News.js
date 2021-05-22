@@ -4,16 +4,16 @@ export default class News
     title;
     content;
     dateNews;
-    urlImage;
-    source;
+    newsImages;
+    newsUrl;
     dateNewsView;
-    constructor(idNews,title,content,dateNews,urlImage,source,dateNewsView){
+    constructor(idNews,title,content,dateNews,newsImages,newsUrl,dateNewsView){
         this.idNews=idNews;
         this.title=title;
         this.content=content;
         this.dateNews=dateNews;
-        this.urlImage=urlImage;
-        this.source=source;
+        this.newsImages=newsImages;
+        this.newsUrl=newsUrl;
         this.dateNewsView=dateNewsView;
     }
     toJson(){
@@ -24,8 +24,8 @@ export default class News
         this.title=json.title;
         this.content=json.content;
         this.dateNews=json.dateNews;
-        this.urlImage=json.urlImage;
-        this.source=json.source;
+        this.newsImages=json.newsImages;
+        this.newsUrl=json.newsUrl;
         return this;
     }
 

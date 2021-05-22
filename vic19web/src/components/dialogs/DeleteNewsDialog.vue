@@ -57,7 +57,7 @@ export default {
     },
     watch:{
       news(value){
-        this.newsEdit=new News(value.idNews,value.title,value.content,value.dateNews,value.urlImage,value.source);
+        this.newsEdit=new News(value.idNews,value.title,value.content,value.dateNews,value.newsImages,value.newsUrl);
         
       }
     },

@@ -43,8 +43,8 @@ const mutations= {
         state.news.title=data.title;
         state.news.content=data.content;
         state.news.dateNews=data.dateNews;
-        state.news.urlImage=data.urlImage;
-        state.news.source=data.source;
+        state.news.newsImages=data.newsImages;
+        state.news.newsUrl=data.newsUrl;
         
         state.newsList.splice(state, 0, data);
     },
@@ -85,7 +85,7 @@ const actions={
         );
     },
     editNews({dispatch,commit},news){
-        commit("general/changeLoading",{type:true,label:"Modificando news"},  { root: true });
+        commit("general/changeLoading",{type:true,label:"Modificando Noticia"},  { root: true });
         newsService.editNews(news)
         .then(
             () => {                

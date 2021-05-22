@@ -15,7 +15,7 @@
         </input-search>
       </v-col>
       <v-col cols="12" lg="3" sm="5" md="4" xl="3" >
-        <v-btn class="button-add" v-on:click="addHospital">
+        <v-btn class="button-add" v-on:click="addNews">
         <v-icon>mdi-plus</v-icon>Agregar Noticia</v-btn>
       </v-col>
     </v-row>
@@ -24,7 +24,7 @@
         <Table :headers="headers"
         :items="newsList"  
         :total="totalNews"
-        @editValue="editHospital($event)"
+        @editValue="editNews($event)"
         @deleteValue="deleteNews($event)"
         @changePage="changePage($event)"
         >
@@ -89,8 +89,8 @@ export default {
       this.dialogEditOpen({news:new News(),title:"Agregar Noticia"})
 
     },
-    editHospital(hospital){
-      this.dialogEditOpen({hospital:hospital,title:"Editar Hospital"})
+    editNews(news){
+      this.dialogEditOpen({news:news,title:"Editar Noticia"})
 
     },
     changePage(page){

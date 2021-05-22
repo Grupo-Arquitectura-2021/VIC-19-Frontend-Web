@@ -3,7 +3,7 @@ import axios from 'axios'
 import News from '../models/News'
 export const newsService = {
     getNews,
-    //editNews,
+    editNews,
     //addNews,
     deleteNews
 };
@@ -44,6 +44,24 @@ async function deleteNews(news) {
     await sleep(2000);
     return axios({
         url: `${apiUrl}news/deleteNews`,
+        method: "PUT",
+        data:news.toJson(),
+        headers: { "Content-Type": 'application/json' },
+        
+      })
+        .then(data => {
+            if(data.status==200){
+                return true;
+            }
+            else{
+                return null;
+            }
+        }).catch(()=>{return null});
+}
+async function editNews(news) {
+    await sleep(2000);
+    return axios({
+        url: `${apiUrl}news/updateNews`,
         method: "PUT",
         data:news.toJson(),
         headers: { "Content-Type": 'application/json' },

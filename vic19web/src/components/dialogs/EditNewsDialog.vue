@@ -21,8 +21,8 @@
                     lg="6"
                   >
                     <input-general
-                    v-bind:value="NewsEdit.name"
-                    v-on:input="NewsEdit.name = $event"   
+                    v-bind:value="newsEdit.title"
+                    v-on:input="newsEdit.title = $event"   
                     :icon="'mdi-pencil'"
                     :label="'Titulo'"
                     :lim="'6'"
@@ -36,8 +36,8 @@
                     lg="6"
                   >
                   <input-general                  
-                    v-bind:value="NewsEdit.lon"
-                    v-on:input="NewsEdit.lon = $event"   
+                    v-bind:value="newsEdit.content"
+                    v-on:input="newsEdit.content = $event"   
                     :icon="'mdi-format-align-justify'"
                     :label="'Contenido'"
                     :lim="'6'"
@@ -51,8 +51,8 @@
                     lg="6"
                   >
                   <input-general                  
-                    v-bind:value="NewsEdit.lat"
-                    v-on:input="NewsEdit.lat = $event"   
+                    v-bind:value="newsEdit.dateNews"
+                    v-on:input="newsEdit.dateNews = $event"   
                     :icon="'mdi-update'"
                     :label="'Fecha de publicacion'"
                     :lim="'6'"
@@ -66,8 +66,8 @@
                     lg="6"
                   >
                   <input-general                  
-                    v-bind:value="NewsEdit.lat"
-                    v-on:input="NewsEdit.lat = $event"   
+                    v-bind:value="newsEdit.newsImages"
+                    v-on:input="newsEdit.newsImages = $event"   
                     :icon="'mdi-image'"
                     :label="'URL Imagen'"
                     :lim="'6'"
@@ -81,8 +81,8 @@
                     lg="6"
                   >
                   <input-general                  
-                    v-bind:value="NewsEdit.lon"
-                    v-on:input="NewsEdit.title = $event"   
+                    v-bind:value="newsEdit.newsUrl"
+                    v-on:input="newsEdit.newsUrl = $event"   
                     :icon="'mdi-newspaper'"
                     :label="'Direccion de la noticia'"
                     :lim="'6'"
@@ -126,7 +126,7 @@ export default {
     },
     data:()=>({        
         active:true,
-        NewsEdit:{},
+        newsEdit:{},
         rules: {
             Required: (value) =>
                 !!value || "Complete el campo por favor."
@@ -134,11 +134,11 @@ export default {
     }),
   
     computed: {
-        ...mapState('viewNewsList', ['dialogEditState','News','title'])
+        ...mapState('viewNewsList', ['dialogEditState','news','title'])
     },
     watch:{
       news(value){
-        this.newsEdit=new News(value.idNews,value.title,value.content,value.dateNews,value.urlImage,value.source);
+        this.newsEdit=new News(value.idNews,value.title,value.content,value.dateNews,value.newsImages,value.newsUrl);
         
       }
     },
