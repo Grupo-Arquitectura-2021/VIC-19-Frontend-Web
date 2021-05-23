@@ -12,30 +12,24 @@
             </v-card-title>
 
             <v-card-text>
-              <v-container>
+              <v-container >
+                
                 <v-row>
-                  <v-col
-                    cols="12"
-                    sm="6"
-                    md="4"
-                    lg="6"
-                  >
-                    <input-general
-                    v-bind:value="newsEdit.title"
-                    v-on:input="newsEdit.title = $event"   
-                    :icon="'mdi-pencil'"
-                    :label="'Titulo'"
-                    :lim="'6'"
-                    :rules="[rules.Required]"
-                    ></input-general>
-                  </v-col>
-                  <v-col
-                    cols="12"
-                    sm="6"
-                    md="4"
-                    lg="6"
-                  >
-                  <input-general                  
+                    <v-col cols="6" sm="12" md="6" lg="6" >
+                      <v-container >
+                        <img :src="newsEdit.newsImages"  class="img-fluid" style="width:100%; height: auto;">
+                      </v-container>  
+                      </v-col>
+                    <v-col  cols="6" sm="12" md="6" lg="6">
+                      <input-general
+                        v-bind:value="newsEdit.title"
+                        v-on:input="newsEdit.title = $event"   
+                        :icon="'mdi-pencil'"
+                        :label="'Titulo'"
+                        :lim="'6'"
+                        :rules="[rules.Required]"
+                      ></input-general>
+                    <input-general                  
                     v-bind:value="newsEdit.content"
                     v-on:input="newsEdit.content = $event"   
                     :icon="'mdi-format-align-justify'"
@@ -43,14 +37,7 @@
                     :lim="'6'"
                     :rules="[rules.Required]"
                     ></input-general>
-                  </v-col>
-                  <v-col
-                    cols="12"
-                    sm="6"
-                    md="4"
-                    lg="6"
-                  >
-                  <input-general                  
+                    <input-general                  
                     v-bind:value="newsEdit.dateNews"
                     v-on:input="newsEdit.dateNews = $event"   
                     :icon="'mdi-update'"
@@ -58,14 +45,7 @@
                     :lim="'6'"
                     :rules="[rules.Required]"
                     ></input-general>
-                  </v-col>
-                  <v-col
-                    cols="12"
-                    sm="6"
-                    md="4"
-                    lg="6"
-                  >
-                  <input-general                  
+                    <input-general                  
                     v-bind:value="newsEdit.newsImages"
                     v-on:input="newsEdit.newsImages = $event"   
                     :icon="'mdi-image'"
@@ -73,14 +53,7 @@
                     :lim="'6'"
                     :rules="[rules.Required]"
                     ></input-general>
-                  </v-col>
-                  <v-col
-                    cols="12"
-                    sm="6"
-                    md="4"
-                    lg="6"
-                  >
-                  <input-general                  
+                     <input-general                  
                     v-bind:value="newsEdit.newsUrl"
                     v-on:input="newsEdit.newsUrl = $event"   
                     :icon="'mdi-newspaper'"
@@ -89,6 +62,7 @@
                     :rules="[rules.Required]"
                     ></input-general>
                   </v-col>
+                  
                 </v-row>
               </v-container>
             </v-card-text>
