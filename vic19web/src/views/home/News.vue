@@ -85,7 +85,7 @@ export default {
       console.log(news);
       this.dialogDeleteOpen(news)
     },
-    addHospital(){
+    addNews(){
       this.dialogEditOpen({news:new News(),title:"Agregar Noticia"})
 
     },

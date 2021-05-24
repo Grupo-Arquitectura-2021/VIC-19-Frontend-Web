@@ -4,7 +4,7 @@ import News from '../models/News'
 export const newsService = {
     getNews,
     editNews,
-    //addNews,
+    addNews,
     deleteNews
 };
 async function sleep(ms) {
@@ -70,6 +70,24 @@ async function editNews(news) {
         .then(data => {
             if(data.status==200){
                 return true;
+            }
+            else{
+                return null;
+            }
+        }).catch(()=>{return null});
+}
+async function addNews(news) {
+    await sleep(2000);
+    return axios({
+        url: `${apiUrl}news/addNews`,
+        method: "POST",
+        data:news.toJson(),
+        headers: { "Content-Type": 'application/json' },
+        
+      })
+        .then(data => {
+            if(data.status==200){
+                return data.data.idNews;
             }
             else{
                 return null;

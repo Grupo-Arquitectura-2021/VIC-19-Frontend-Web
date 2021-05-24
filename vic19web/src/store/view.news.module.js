@@ -98,9 +98,8 @@ const actions={
             }
         );
     },
-    /*
     addNews({dispatch,commit},news){
-        commit("general/changeLoading",{type:true,label:"Agregando news"},  { root: true });
+        commit("general/changeLoading",{type:true,label:"Agregando Noticia"},  { root: true });
         newsService.addNews(news)
         .then(
             (id) => {          
@@ -114,7 +113,7 @@ const actions={
             }
         );
     },
-    */
+    
     deleteNews({dispatch,commit},news){
         commit("general/changeLoading",{type:true,label:"Eliminando news"},  { root: true });
         newsService.deleteNews(news)

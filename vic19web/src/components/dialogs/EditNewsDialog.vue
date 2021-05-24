@@ -18,6 +18,8 @@
                     <v-col cols="6" sm="12" md="6" lg="6" >
                       <v-container >
                         <img :src="newsEdit.newsImages"  class="img-fluid" style="width:100%; height: auto;">
+                        <!--<button v-on:click="di('hola')">Di hola</button>
+                        <button v-on:click="counter += 1">Add 1</button> -->
                       </v-container>  
                       </v-col>
                     <v-col  cols="6" sm="12" md="6" lg="6">
