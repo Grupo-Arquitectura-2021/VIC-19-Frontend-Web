@@ -79,6 +79,7 @@ export default {
     watch:{
       hospitals(value){
         console.log(value);
+        console.log(this.totalHospitals);
         this.items=value;
         for(let h of this.hospitals){
           this.citiesData.find((city)=>{
@@ -95,8 +96,7 @@ export default {
   methods:{
     ...mapActions('viewHospitals', ['dialogEditOpen','dialogDeleteOpen','getHospitals','getCities']),
     deleteHospital(hospital){
-      console.log(hospital);
-      //this.dialogDeleteOpen(hospital)
+      this.dialogDeleteOpen(hospital)
     },
     addHospital(){
       this.dialogEditOpen({hospital:new Hospital(),title:"Agregar Hospital"})

@@ -8,11 +8,11 @@
         <v-card
           class="dialog-container">
             <v-card-title>
-              <span class="headline">Eliminar Farmacia</span>
+              <span class="headline">Eliminar Cuenta</span>
             </v-card-title>
 
             <v-card-text>
-              Esta seguro que desea eliminar la farmacia "{{drugstore.name}}"
+              Esta seguro que desea eliminar la cuenta "{{account.userName}}"
             </v-card-text>
 
             <v-card-actions>
@@ -39,39 +39,35 @@
 </template>
 <script>
 import { mapState,mapActions} from 'vuex'
-import Drugstore from '../../models/Drugstore';
+import Account from '../../models/Account';
 
 
 export default {
     props:{
     },
-    
     data:()=>({       
         accountEdit:{},
-        drugstoreEdit:{},
     }),
   
     computed: {
-        ...mapState('viewDrugstores', ['dialogDeleteState','drugstore'])
+        ...mapState('viewAccounts', ['dialogDeleteState','account'])
     },
     mounted(){
     },
-    
     watch:{
-      drugstore(value){
-        this.drugstoreEdit=new Drugstore(value.idDrugstore,value.idCity,value.name,value.lon,value.lat);
+      account(value){
+        this.accountEdit=new Account(value.idUser,value.userName);
         
       }
     },
-
     methods:{
-    ...mapActions('viewDrugstores', ['dialogDeleteClose','deleteDrugstore']),
+    ...mapActions('viewAccounts', ['dialogDeleteClose','deleteAccount']),
       cancel(){
         this.dialogDeleteClose();
       },  
       save(){
         this.dialogDeleteClose();
-        this.deleteDrugstore(this.drugstoreEdit)}
+        this.deleteAccount(this.accountEdit)}
     }
 }
 </script>

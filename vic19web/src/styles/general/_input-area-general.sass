@@ -3,7 +3,6 @@
 .icon-card
     background-color: $color4
     height: 46px
-    width: 46px
     border-top-left-radius: 9px
     border-bottom-left-radius: 9px
     margin-left: -1px !important
@@ -22,11 +21,9 @@
     text-align: center
     top: 50%
     -ms-transform: translateY(-50%)
-    transform: translateY(-50%)
+    transform: translateY(-50%) 
     
 .input
-    height: 46px !important
-    width: 100%
     background-color: $color4 !important
     outline-color: none !important
     border: none
@@ -35,14 +32,30 @@
     box-shadow: none
     box-shadow: none
     width: 100%
-    padding-top: 3px
+    overflow-x: hidden
     
-    border-top-right-radius: 9px
-    border-bottom-right-radius: 9px
-    border-top-left-radius: 0px
-    border-bottom-left-radius: 0px
+    border-radius: 9px
+.input-in
 .v-text-field--outlined  ::v-deep fieldset
   border-color: rgba(0, 0, 0, 0) !important
 
 .input-in  ::v-deep .v-messages__message
     color: #b90c00 !important
+
+.input-in  ::v-deep   textarea::-webkit-scrollbar 
+    width: 0.5em
+
+
+.input-in  ::v-deep   textarea::-webkit-scrollbar-track 
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3)
+
+
+.input-in   ::v-deep  textarea::-webkit-scrollbar-thumb 
+    border-radius: 8px
+    background: $color2-50
+
+.input-in   ::v-deep  textarea::-webkit-resizer
+  background-color: $color4
+  width: 100%
+  color: $color4
+

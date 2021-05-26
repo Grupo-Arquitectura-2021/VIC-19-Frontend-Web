@@ -2,15 +2,13 @@
       <div>
         <v-row no-gutters class="label">{{label}}</v-row>
         <v-row no-gutters>
-            <div class="icon-card">
-                <v-icon class=" icon" >{{icon}}</v-icon>        
-            </div>
-            <v-col>
+            <v-col cols="12">
               <div class="input">
-                <v-text-field
+                <v-textarea
                 dark
                 dense
                 class="input-in"
+                hide-details="true"
                 v-bind:value="value" 
                 v-on:input="input($event)"
                 single-line
@@ -52,5 +50,5 @@ export default {
 </script>
 
 <style scoped lang="sass">
-@import "@/styles/general/_input-general.sass"  
+@import "@/styles/general/_input-area-general.sass"  
 </style>

@@ -21,8 +21,8 @@
                     lg="6"
                   >
                     <input-general
-                    v-bind:value="accountEdit.name"
-                    v-on:input="accountEdit.name = $event"   
+                    v-bind:value="accountEdit.userName"
+                    v-on:input="accountEdit.userName = $event"   
                     :icon="'mdi-account-edit'"
                     :label="'Nombre'"
                     :lim="'6'"
@@ -57,6 +57,22 @@
                     :label="'Email'"
                     :lim="'6'"
                     :rules="[rules.Required]"
+                    ></input-general>
+                  </v-col>
+                  
+                  <v-col
+                    cols="12"
+                    sm="6"
+                    md="4"
+                    lg="6"
+                  >
+                  <input-general                  
+                    v-bind:value="accountEdit.password"
+                    v-on:input="accountEdit.password = $event"   
+                    :icon="'mdi-lock'"
+                    :label="'Password'"
+                    :lim="'6'"
+                    :rules="[rules.passwordMin]"
                     ></input-general>
                   </v-col>
                 </v-row>
@@ -99,7 +115,10 @@ export default {
         accountEdit:{},
         rules: {
             Required: (value) =>
-                !!value || "Complete el campo por favor."
+                !!value || "Complete el campo por favor.",
+            passwordMin: (value) =>
+                value==null?true:String(value).length<8?"Debe tener al menos 8 carácteres.":true || "Debe tener al menos 8 carácteres.",    
+            
         }
     }),
   
@@ -108,20 +127,33 @@ export default {
     },
     watch:{
       account(value){
-        this.accountEdit=new Account(value.id,value.name,value.lastName,value.email);
+        this.accountEdit=new Account(value.idUser,value.userName,value.lastName,value.email);
+        console.log(this.accountEdit);
       }
     },
     mounted(){
     },
     methods:{
-    ...mapActions('viewAccounts', ['dialogEditClose','dialogDelete']),
+    ...mapActions('viewAccounts', ['dialogEditClose','dialogDelete','editAccount','addAccount']),
       cancel(){
         this.dialogEditClose();
       },  
-      save(){}
+      save(){
+        console.log(this.title);
+        switch(this.title){
+          case "Editar Cuenta":
+            this.dialogEditClose();
+            this.editAccount(this.accountEdit);
+            break;
+          case "Agregar Cuenta":
+             this.dialogEditClose();   
+            this.addAccount(this.accountEdit);
+            break;  
+        }
+      }
     }
 }
 </script>
 <style lang="sass">
-@import "@/styles/dialogs/_editAccountDialog.sass"    
+@import "@/styles/dialogs/_editDialog.sass"    
 </style>
