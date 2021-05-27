@@ -42,7 +42,7 @@ async function getDrugstores(n,i,search) {
 async function editDrugstore(drugstore) {
     await sleep(2000);
     return axios({
-        url: `${apiUrl}drugstore/updateDrugstore`,
+        url: `${apiUrl}drugstore`,
         method: "PUT",
         data:drugstore.toJson(),
         headers: { "Content-Type": 'application/json' },
@@ -81,7 +81,7 @@ async function deleteDrugstore(drugstore) {
     console.log(drugstore.toJson())
     await sleep(2000);
     return axios({
-        url: `${apiUrl}drugstore/deleteDrugstore?`+complement,
+        url: `${apiUrl}drugstore?`+complement,
         method: "DELETE",
         data:drugstore.toJson(),
         headers: { "Content-Type": 'application/json' },
