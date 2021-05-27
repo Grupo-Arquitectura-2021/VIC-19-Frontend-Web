@@ -18,7 +18,7 @@ async function getDrugstores(n,i,search) {
     complement=`n=${n}&i=${i}&search=${search}`
     await sleep(2000);
     return axios({
-        url: `${apiUrl}drugstore/allInfo?`+complement, 
+        url: `${apiUrl}drugstore?`+complement, 
         method: "GET",
         headers: { "Content-Type": 'application/json' },
         
