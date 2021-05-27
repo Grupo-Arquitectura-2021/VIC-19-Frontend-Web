@@ -42,7 +42,7 @@ async function getHospitals(n,i,search) {
 async function editHospital(hospital) {
     await sleep(2000);
     return axios({
-        url: `${apiUrl}hospital/updateHospital`,
+        url: `${apiUrl}hospital`,
         method: "PUT",
         data:hospital.toJson(),
         headers: { "Content-Type": 'application/json' },
@@ -60,7 +60,7 @@ async function editHospital(hospital) {
 async function addHospital(hospital) {
     await sleep(2000);
     return axios({
-        url: `${apiUrl}hospital/addHospital`,
+        url: `${apiUrl}hospital`,
         method: "POST",
         data:hospital.toJson(),
         headers: { "Content-Type": 'application/json' },
@@ -79,9 +79,11 @@ async function deleteHospital(hospital) {
     console.log(hospital.toJson())
     await sleep(2000);
     return axios({
-        url: `${apiUrl}hospital/deleteHospital`,
-        method: "PUT",
-        data:hospital.toJson(),
+        url: `${apiUrl}hospital`,
+        method: "DELETE"
+        ,params:{
+            hospitalId:hospital.idHospital
+        },
         headers: { "Content-Type": 'application/json' },
         
       })

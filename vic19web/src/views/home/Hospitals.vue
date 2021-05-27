@@ -79,6 +79,7 @@ export default {
     watch:{
       hospitals(value){
         console.log(value);
+        console.log(this.totalHospitals);
         this.items=value;
         for(let h of this.hospitals){
           this.citiesData.find((city)=>{

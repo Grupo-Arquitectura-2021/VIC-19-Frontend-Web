@@ -15,14 +15,13 @@
               <v-container >
                 
                 <v-row>
-                    <v-col cols="6" sm="12" md="6" lg="6" >
+                    <v-col cols="12" sm="12" md="6" lg="6" class="pa-0"  >
                       <v-container >
-                        <img :src="newsEdit.newsImages"  class="img-fluid" style="width:100%; height: auto;">
+                        <v-img :src="newsEdit.newsImages"  class="image" v-on:error="getImgError" ></v-img>
                         <!--<button v-on:click="di('hola')">Di hola</button>
                         <button v-on:click="counter += 1">Add 1</button> -->
-                      </v-container>  
-                      </v-col>
-                    <v-col  cols="6" sm="12" md="6" lg="6">
+                      </v-container> 
+                      <v-col cols="12"> 
                       <input-general
                         v-bind:value="newsEdit.title"
                         v-on:input="newsEdit.title = $event"   
@@ -31,39 +30,52 @@
                         :lim="'6'"
                         :rules="[rules.Required]"
                       ></input-general>
-                    <input-general                  
-                    v-bind:value="newsEdit.content"
-                    v-on:input="newsEdit.content = $event"   
-                    :icon="'mdi-format-align-justify'"
-                    :label="'Contenido'"
-                    :lim="'6'"
-                    :rules="[rules.Required]"
-                    ></input-general>
-                    <input-general                  
-                    v-bind:value="newsEdit.dateNews"
-                    v-on:input="newsEdit.dateNews = $event"   
-                    :icon="'mdi-update'"
-                    :label="'Fecha de publicacion'"
-                    :lim="'6'"
-                    :rules="[rules.Required]"
-                    ></input-general>
-                    <input-general                  
-                    v-bind:value="newsEdit.newsImages"
-                    v-on:input="newsEdit.newsImages = $event"   
-                    :icon="'mdi-image'"
-                    :label="'URL Imagen'"
-                    :lim="'6'"
-                    :rules="[rules.Required]"
-                    ></input-general>
-                     <input-general                  
-                    v-bind:value="newsEdit.newsUrl"
-                    v-on:input="newsEdit.newsUrl = $event"   
-                    :icon="'mdi-newspaper'"
-                    :label="'Direccion de la noticia'"
-                    :lim="'6'"
-                    :rules="[rules.Required]"
-                    ></input-general>
-                  </v-col>
+                      </v-col>
+                    </v-col>
+                    <v-col  cols="12" sm="12" md="6" lg="6" class="pa-0" >
+                      
+                        <v-col cols="12">
+                          <input-area-general                  
+                          v-bind:value="newsEdit.content"
+                          v-on:input="newsEdit.content = $event"   
+                          :icon="'mdi-format-align-justify'"
+                          :label="'Contenido'"
+                          :lim="'6'"
+                          :rules="[rules.Required]"
+                          ></input-area-general>
+                        </v-col>
+                        <v-col  cols="12">
+                          <input-general                  
+                          v-bind:value="newsEdit.dateNews"
+                          v-on:input="newsEdit.dateNews = $event"   
+                          :icon="'mdi-update'"
+                          :label="'Fecha de publicacion'"
+                          :lim="'6'"
+                          :rules="[rules.Required]"
+                          ></input-general>
+                        </v-col>
+                        <v-col  cols="12">
+                          <input-general                  
+                          v-bind:value="newsEdit.newsImages"
+                          v-on:input="newsEdit.newsImages = $event"   
+                          :icon="'mdi-image'"
+                          :label="'URL Imagen'"
+                          :lim="'6'"
+                          :rules="[rules.Required]"
+                          ></input-general>
+                        </v-col>
+                        <v-col  cols="12">
+                          <input-general                  
+                          v-bind:value="newsEdit.newsUrl"
+                          v-on:input="newsEdit.newsUrl = $event"   
+                          :icon="'mdi-newspaper'"
+                          :label="'Direccion de la noticia'"
+                          :lim="'6'"
+                          :rules="[rules.Required]"
+                          ></input-general>
+                        </v-col>
+                    </v-col>
+                    
                   
                 </v-row>
               </v-container>
@@ -94,10 +106,11 @@
 <script>
 import { mapState,mapActions} from 'vuex'
 import News from '../../models/News'
+import InputAreaGeneral from '../inputs/InputAreaGeneral.vue';
 import InputGeneral from '../inputs/InputGeneral.vue';
 
 export default {
-  components: { InputGeneral},
+  components: { InputGeneral, InputAreaGeneral},
     props:{
     },
     data:()=>({        
@@ -106,7 +119,8 @@ export default {
         rules: {
             Required: (value) =>
                 !!value || "Complete el campo por favor."
-        }
+        },
+        imageNews:""
     }),
   
     computed: {
@@ -125,6 +139,10 @@ export default {
       cancel(){
         this.dialogEditClose();
       },  
+      getImgError(){
+          this.newsEdit.newsImages = require("../../assets/no-img.png");
+          this.$forceUpdate()
+      },
       save(){
         console.log(this.title);
         switch(this.title){
@@ -142,5 +160,5 @@ export default {
 }
 </script>
 <style lang="sass">
-@import "@/styles/dialogs/_editAccountDialog.sass"    
+@import "@/styles/dialogs/_editDialog.sass"    
 </style>
