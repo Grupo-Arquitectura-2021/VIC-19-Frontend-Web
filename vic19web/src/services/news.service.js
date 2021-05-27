@@ -39,12 +39,15 @@ async function getNews(n,i,search) {
         }).catch(()=>{
             throw "error";});
 }
+
 async function deleteNews(news) {
+    var complement = "";
+    complement= `newsId=${news.idNews}`
     console.log(news.toJson())
     await sleep(2000);
     return axios({
-        url: `${apiUrl}news/deleteNews`,
-        method: "PUT",
+        url: `${apiUrl}news?`+complement,
+        method: "DELETE",
         data:news.toJson(),
         headers: { "Content-Type": 'application/json' },
         
@@ -59,9 +62,10 @@ async function deleteNews(news) {
         }).catch(()=>{return null});
 }
 async function editNews(news) {
+
     await sleep(2000);
     return axios({
-        url: `${apiUrl}news/updateNews`,
+        url: `${apiUrl}news`,
         method: "PUT",
         data:news.toJson(),
         headers: { "Content-Type": 'application/json' },
@@ -79,7 +83,7 @@ async function editNews(news) {
 async function addNews(news) {
     await sleep(2000);
     return axios({
-        url: `${apiUrl}news/addNews`,
+        url: `${apiUrl}news`,
         method: "POST",
         data:news.toJson(),
         headers: { "Content-Type": 'application/json' },
