@@ -96,6 +96,7 @@ export default {
   methods:{
     ...mapActions('viewHospitals', ['dialogEditOpen','dialogDeleteOpen','getHospitals','getCities']),
     deleteHospital(hospital){
+      console.log(hospital);
       this.dialogDeleteOpen(hospital)
     },
     addHospital(){
