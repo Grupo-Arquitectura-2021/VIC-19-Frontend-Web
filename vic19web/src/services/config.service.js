@@ -15,36 +15,46 @@ axios.interceptors.response.use((response) => {
   }, async function (error) {
     const originalRequest = error.config;
     try{
-        if (error.response.status === 401 && !originalRequest._retry) {      
+        if (error.response.status === 401 && !originalRequest._retry) {    
+            originalRequest._retry=true;  
             const token_refresh = tokenLib.getRefrehToken()
             const params = new URLSearchParams()
             params.append('refresh_token', token_refresh)
             params.append('grant_type', 'refresh_token')
-            var data=await axios({
+            tokenLib.removeTokens();
+            if (token_refresh!=null || token_refresh!=undefined){
+              var data=await axios({
                 url: `${apiUrl}oauth/token`, 
                 params:params,
                 method: "POST",
                 headers: { 'content-type': 'application/x-www-form-urlencoded;charset=utf-8' ,"Authorization":'Basic Y292aWQxOXByb3llY3Q6Y292aWQxOXByb3llY3QxMjM0NQ=='},
                 
               });
-            
             if(data.status==200){
                 tokenLib.setTokens(data.data.access_token,data.data.refresh_token)
                 return axios(originalRequest);
             }
             else{
+                location.reload();
                 return Promise.reject(error);
+            }
+            }
+            else{
+              location.reload();
+              return Promise.reject(error);
             }
         
         }
         else if(originalRequest._retry){
             tokenLib.removeTokens();
-            location.reload()
+            location.reload();
+            return Promise.reject(error);
+    
         }
         return Promise.reject(error);
     
       }
-    catch(e){        
+    catch(e){      
         return Promise.reject(error);
     }
   });
