@@ -2,51 +2,55 @@
   <v-row  class="main" no-gutters> 
       <v-col cols="12" >
         <v-container>
-          <h3 class="title-warning">* Este apartado le servirá para que pueda subir sus CSV manualmente, recuerde utilizar este apartado
-            con precausion pues puede ocacionar inconsistencia en los datos de la base de datos*</h3>
+          <h3 class="title-warning">Este apartado le servirá para que pueda subir sus CSV manualmente, recuerde utilizar este apartado
+            con precausion pues puede ocacionar inconsistencia en los datos de la base de datos</h3>
         </v-container>
         <br><br>
-         <v-container  v-bind:class="{ 'container-files--active':filelist.length>0 ,'container-files--deactive':filelist.length==0 }" class="container-files"  @dragover="dragover" @dragleave="dragleave" @drop="drop">
+         <v-container >
             <v-row no-gutters class="justify-center">
-              <v-col cols="3" >
-                      <v-img v-if="filelist.length==0" class="container-files__image" src="../../assets/upload.png" 
-                      aspect-ratio="1"></v-img>
-                      <v-icon v-if="filelist.length!=0" size="100px" class="container-files__icon">mdi-file-chart</v-icon>
+              <v-col cols="11" xl="5" lg="7" md="8" sm="10"  v-bind:class="{ 'container-files--active':filelist.length>0 ,'container-files--deactive':filelist.length==0 }" class="container-files"  @dragover="dragover" @dragleave="dragleave" @drop="drop">
+                <v-row no-gutters class="justify-center">
+                  <v-col cols="2" >
+                          <v-img v-if="filelist.length==0" class="container-files__image" src="../../assets/upload.png" 
+                          aspect-ratio="1"></v-img>
+                          <v-icon v-if="filelist.length!=0" size="100px" class="container-files__icon">mdi-file-chart</v-icon>
+                  </v-col>
+                </v-row>
+                <v-row no-gutters  v-if="filelist.length!=0" >
+                  <v-col cols="12" >
+                    <h4 class="container-files__label">{{filelist[0].name}}</h4>
+                  </v-col>
+                </v-row>
+                <v-row no-gutters>
+                  <v-col>
+                    <input hidden type="file" id="files" 
+                    @change="onChange" ref="file" accept=".csv" />
+                  </v-col>
+                </v-row>
+                <v-row  no-gutters  v-if="filelist.length==0" >
+                  <v-col cols="12" class="d-flex justify-center pa-4">
+                    <button class="container-files__label" 
+                        v-on:click="edit()" ><h4>Elija un archivo o arrastrelo hasta aqui</h4></button>
+                  </v-col>
+                </v-row>
+                <v-row  v-if="filelist.length!=0" class="justify-center pa-0" no-gutters>
+                <br><br>
+                      <v-icon
+                          large
+                          class="container-files__edit"
+                        v-on:click="edit()" 
+                      >
+                          mdi-pencil
+                      </v-icon>
+                      <v-icon
+                          large
+                          class="container-files__remove"
+                          v-on:click="remove()"
+                      >
+                          mdi-delete
+                      </v-icon>
+                </v-row>
               </v-col>
-            </v-row>
-            <v-row no-gutters  v-if="filelist.length!=0" >
-              <v-col cols="12" >
-                <h3 class="container-files__label">{{filelist[0].name}}</h3>
-              </v-col>
-            </v-row>
-            <v-row>
-              <v-col>
-                <input hidden type="file" id="files" 
-                 @change="onChange" ref="file" accept=".csv" />
-              </v-col>
-            </v-row>
-            <v-row  no-gutters  v-if="filelist.length==0" >
-              <v-col cols="12" class="d-flex justify-center">
-                <button class="container-files__label" 
-                     v-on:click="edit()" ><h3>Elija un archivo o arrastrelo hasta aqui</h3></button>
-              </v-col>
-            </v-row>
-            <v-row  v-if="filelist.length!=0" class="justify-center">
-            <br><br>
-                  <v-icon
-                      large
-                      class="container-files__edit"
-                     v-on:click="edit()" 
-                  >
-                      mdi-pencil
-                  </v-icon>
-                  <v-icon
-                      large
-                      class="container-files__remove"
-                      v-on:click="remove()"
-                  >
-                      mdi-delete
-                  </v-icon>
             </v-row>
          </v-container>
          <br><br>
@@ -78,7 +82,7 @@
            <br>
            <v-row class="justify-center"  align="center" 
                justify="center" no-gutters>
-                  <v-col cols="12" lg="3" sm="5" md="4" xl="3" >
+                  <v-col cols="10" lg="3" sm="7" md="4" xl="3" >
                     <v-btn class="button-add" v-on:click="addHospital">
                     <v-icon>mdi-upload</v-icon>Subir archivo</v-btn>
                   </v-col>

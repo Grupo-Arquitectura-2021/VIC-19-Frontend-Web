@@ -5,7 +5,7 @@
     <v-row  class="header-container">
       <v-col cols="12" lg="4" sm="5" md="4" xl="3" >
         <input-search
-        :label="'Buscar Account'"
+        :label="'Buscar Cuenta'"
         v-bind:value="search"
         v-on:input="search = $event"   
         @keyup.enter.native="searchData"  
@@ -16,7 +16,7 @@
       </v-col>
       <v-col cols="12" lg="3" sm="5" md="4" xl="3" >
         <v-btn class="button-add" v-on:click="addAccount">
-        <v-icon>mdi-plus</v-icon>Agregar Account</v-btn>
+        <v-icon>mdi-plus</v-icon>Agregar Cuenta</v-btn>
       </v-col>
     </v-row>
     <v-row>

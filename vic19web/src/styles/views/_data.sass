@@ -1,8 +1,9 @@
 .container-files
-    width: 70%
+    width: 100%
     border-radius: 10px
-    border-color: $color7
+    border-color: $color7-50
     border-style: dashed
+    border-width: 2px
 .container-files--active
     background-color: $color3-20
 .container-files--deactive
@@ -27,9 +28,16 @@
     height: 100px   
 .container-files__edit.v-icon
     color: $color7-50
+.container-files__edit::after
+    background-color: transparent !important
+    border-radius: 0px !important
 
 .container-files__remove.v-icon
     color: $color7
+
+.container-files__remove::after
+    background-color: transparent !important
+    border-radius: 0px !important
 .title-warning
     text-align: center
     font-weight: 400
