@@ -12,7 +12,7 @@
             </v-card-title>
 
             <v-card-text>
-              Esta seguro que desea eliminar la noticia "{{news.name}}"
+              Esta seguro que desea eliminar la noticia "{{news.idNews}}"
             </v-card-text>
 
             <v-card-actions>

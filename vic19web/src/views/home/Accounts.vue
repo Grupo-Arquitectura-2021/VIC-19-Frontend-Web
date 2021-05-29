@@ -79,7 +79,7 @@ export default {
       },
     },
   methods:{
-    ...mapActions('viewAccounts', ['dialogEditOpen','dialogDeleteOpen','getAccounts','getCities']),
+    ...mapActions('viewAccounts', ['dialogEditOpen','dialogDeleteOpen','getAccounts']),
     deleteAccount(account){
       this.dialogDeleteOpen(account)
     },
