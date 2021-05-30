@@ -7,9 +7,6 @@ export const shelterService = {
     addShelter,
     deleteShelter
 };
-async function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-  }
 async function getShelters(n,i,search) {
     
     var complement="";
@@ -17,7 +14,6 @@ async function getShelters(n,i,search) {
     complement=`n=${n}&i=${i}`
     else
     complement=`n=${n}&i=${i}&search=${search}`
-    await sleep(2000);
     return axios({
         url: `${apiUrl}shelter/allInfo?`+complement, 
         method: "GET",
@@ -41,7 +37,6 @@ async function getShelters(n,i,search) {
         }).catch(()=>{return null});
 }
 async function editShelter(shelter) {
-    await sleep(2000);
     return axios({
         url: `${apiUrl}shelter/updateShelter`,
         method: "PUT",
@@ -59,7 +54,6 @@ async function editShelter(shelter) {
         }).catch(()=>{return null});
 }
 async function addShelter(shelter) {
-    await sleep(2000);
     return axios({
         url: `${apiUrl}shelter/addShelter`,
         method: "POST",
@@ -77,8 +71,6 @@ async function addShelter(shelter) {
         }).catch(()=>{return null});
 }
 async function deleteShelter(shelter) {
-    console.log(shelter.toJson())
-    await sleep(2000);
     return axios({
         url: `${apiUrl}shelter/deleteShelter`,
         method: "PUT",

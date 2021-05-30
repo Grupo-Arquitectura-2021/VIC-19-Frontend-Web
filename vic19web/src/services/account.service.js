@@ -8,11 +8,7 @@ export const accountService = {
     deleteAccount,
     getAccounts
 };
-async function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-  }
 async function login(loginRequest) {
-    await sleep(2000);
     return axios({
         url: `${apiUrl}oauth/token`, 
         params:loginRequest.toJson(),
@@ -40,7 +36,6 @@ async function getAccounts(n,i,search) {
     complement=`n=${n}&i=${i}`
     else
     complement=`n=${n}&i=${i}&search=${search}`
-    await sleep(2000);
     return axios({
         url: `${apiUrl}user?`+complement, 
         method: "GET",
@@ -66,8 +61,6 @@ async function getAccounts(n,i,search) {
             throw "error";});
 }
 async function editAccount(account) {
-    console.log("editanto");
-    await sleep(2000);
     return axios({
         url: `${apiUrl}user`,
         method: "PUT",
@@ -88,7 +81,6 @@ async function editAccount(account) {
             throw "error";});
 }
 async function addAccount(account) {
-    await sleep(2000);
     return axios({
         url: `${apiUrl}user`,
         method: "POST",
@@ -106,8 +98,6 @@ async function addAccount(account) {
         }).catch(()=>{return null});
 }
 async function deleteAccount(account) {
-    console.log(account.toJson())
-    await sleep(2000);
     return axios({
         url: `${apiUrl}user`,
         method: "DELETE"

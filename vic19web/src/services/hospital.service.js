@@ -7,16 +7,12 @@ export const hospitalService = {
     addHospital,
     deleteHospital
 };
-async function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-  }
 async function getHospitals(n,i,search) {
     var complement="";
     if(search==null||search==""||search==undefined)
     complement=`n=${n}&i=${i}`
     else
     complement=`n=${n}&i=${i}&search=${search}`
-    await sleep(2000);
     return axios({
         url: `${apiUrl}hospital/allInfo?`+complement, 
         method: "GET",
@@ -40,7 +36,6 @@ async function getHospitals(n,i,search) {
             throw "error";});
 }
 async function editHospital(hospital) {
-    await sleep(2000);
     return axios({
         url: `${apiUrl}hospital`,
         method: "PUT",
@@ -58,7 +53,6 @@ async function editHospital(hospital) {
         }).catch(()=>{return null});
 }
 async function addHospital(hospital) {
-    await sleep(2000);
     return axios({
         url: `${apiUrl}hospital`,
         method: "POST",
@@ -76,8 +70,6 @@ async function addHospital(hospital) {
         }).catch(()=>{return null});
 }
 async function deleteHospital(hospital) {
-    console.log(hospital.toJson())
-    await sleep(2000);
     return axios({
         url: `${apiUrl}hospital`,
         method: "DELETE"

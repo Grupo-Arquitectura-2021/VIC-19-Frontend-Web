@@ -8,6 +8,7 @@ import { viewHospitals } from './view.hospitals.module';
 import { viewNewsList } from './view.news.module';
 import { viewShelters } from './view.shelters.module';
 import { viewDrugstores } from './view.drugstores.module';
+import { data } from './data.module';
 
 Vue.use(Vuex);
 
@@ -19,6 +20,7 @@ export const store = new Vuex.Store({
         viewHospitals,
         viewDrugstores,
         viewShelters,
-        general
+        general,
+        data
     }
 });

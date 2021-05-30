@@ -62,8 +62,8 @@
                   <select-value 
                   :items="locations"
                   :label="'Tipo'" 
-                  v-bind:value="location"
-                  v-on:input="location = $event"  
+                  v-bind:value="type"
+                  v-on:input="type = $event"  
                 ></select-value>
                 </v-col>
            </v-row>
@@ -73,17 +73,17 @@
               <v-col cols="6" xl="3" md="4" class="d-flex justify-space-around">
                   <v-switch
                   class="pa-0 ma-0 red--text"
-                  v-model="type"
+                  v-model="replace"
                   color="black"
                 ></v-switch>
-                  <h4>Sobre Escribir: {{type?'Si':'No'}}</h4>
+                  <h4>Sobre Escribir: {{replace?'Si':'No'}}</h4>
               </v-col>
            </v-row>
            <br>
            <v-row class="justify-center"  align="center" 
                justify="center" no-gutters>
                   <v-col cols="10" lg="3" sm="7" md="4" xl="3" >
-                    <v-btn class="button-add" v-on:click="addHospital">
+                    <v-btn class="button-add" v-on:click="upload">
                     <v-icon>mdi-upload</v-icon>Subir archivo</v-btn>
                   </v-col>
            </v-row>
@@ -98,15 +98,18 @@
 
 <script>
 import selectValue from '../../components/inputs/selectValue.vue';
+import { mapActions} from 'vuex'
+import Data from '../../models/Data'
 export default {
   components: { selectValue },
   data:()=> ({
     filelist: [] ,
     locations:[{name:'Paises',id:'1'},{name:'Departamentos',id:'2'},{name:'Municipios',id:'3'}],
-    location:0,
-    type:false
+    type:0,
+    replace:false
   }),
   methods:{
+    ...mapActions('data', ['uploadData']),
     onChange() {
       this.filelist = [...this.$refs.file.files];
     },
@@ -140,6 +143,12 @@ export default {
     edit(){
         document.getElementById("files").click()
     },
+    upload(){
+        if(this.type!=0&&this.filelist.length==1){
+            var data=new Data(this.type,this.replace,this.filelist[0]);
+            this.uploadData(data);
+        }
+    }
   }
 }
 </script>

@@ -7,16 +7,12 @@ export const newsService = {
     addNews,
     deleteNews
 };
-async function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-  }
 async function getNews(n,i,search) {
     var complement="";
     if(search==null||search==""||search==undefined)
     complement=`n=${n}&i=${i}`
     else
     complement=`n=${n}&i=${i}&search=${search}`
-    await sleep(2000);
     return axios({
         url: `${apiUrl}news?`+complement, 
         method: "GET",
@@ -43,8 +39,6 @@ async function getNews(n,i,search) {
 async function deleteNews(news) {
     var complement = "";
     complement= `newsId=${news.idNews}`
-    console.log(news.toJson())
-    await sleep(2000);
     return axios({
         url: `${apiUrl}news?`+complement,
         method: "DELETE",
@@ -62,8 +56,6 @@ async function deleteNews(news) {
         }).catch(()=>{return null});
 }
 async function editNews(news) {
-
-    await sleep(2000);
     return axios({
         url: `${apiUrl}news`,
         method: "PUT",
@@ -81,7 +73,6 @@ async function editNews(news) {
         }).catch(()=>{return null});
 }
 async function addNews(news) {
-    await sleep(2000);
     return axios({
         url: `${apiUrl}news`,
         method: "POST",

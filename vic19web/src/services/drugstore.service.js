@@ -7,16 +7,12 @@ export const drugstoreService = {
     addDrugstore,
     deleteDrugstore
 };
-async function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-  }
 async function getDrugstores(n,i,search) {
     var complement="";
     if(search==null||search==""||search==undefined)
     complement=`n=${n}&i=${i}`
     else
     complement=`n=${n}&i=${i}&search=${search}`
-    await sleep(2000);
     return axios({
         url: `${apiUrl}drugstore?`+complement, 
         method: "GET",
@@ -40,7 +36,6 @@ async function getDrugstores(n,i,search) {
             throw "error";});
 }
 async function editDrugstore(drugstore) {
-    await sleep(2000);
     return axios({
         url: `${apiUrl}drugstore`,
         method: "PUT",
@@ -58,7 +53,6 @@ async function editDrugstore(drugstore) {
         }).catch(()=>{return null});
 }
 async function addDrugstore(drugstore) {
-    await sleep(2000);
     return axios({
         url: `${apiUrl}drugstore`,
         method: "POST",
@@ -78,8 +72,6 @@ async function addDrugstore(drugstore) {
 async function deleteDrugstore(drugstore) {
     var complement = "";
     complement= `drugstoreId=${drugstore.idDrugstore}`
-    console.log(drugstore.toJson())
-    await sleep(2000);
     return axios({
         url: `${apiUrl}drugstore?`+complement,
         method: "DELETE",
