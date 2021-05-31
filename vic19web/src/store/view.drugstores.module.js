@@ -1,39 +1,39 @@
-import Shelter from '../models/Shelter';
-import {shelterService} from '../services'
+import Drugstore from '../models/Drugstore';
+import {drugstoreService} from '../services'
 import {citiesService} from '../services'
 const state={
     dialogEditState:false,
     dialogDeleteState:false,
-    shelter:new Shelter(),
+    drugstore:new Drugstore(),
     title:"",
-    totalShelters:0,
+    totalDrugstores:0,
     status:{},
-    shelters:[],
+    drugstores:[],
     cities:[]
 };
 const mutations= {
     dialogEditOpen(state,data) {
         state.dialogEditState=true;
-        state.shelter=data.shelter;
+        state.drugstore=data.drugstore;
         state.title=data.title;
     },
     dialogEditClose(state) {
         state.dialogEditState=false;
-        state.shelter=new Shelter();
+        state.drugstore=new Drugstore();
         state.title="";
     },
     dialogDeleteOpen(state,data) {
         state.dialogDeleteState=true;
-        state.shelter=data;
+        state.drugstore=data;
     },
     dialogDeleteClose(state) {
         state.dialogDeleteState=false;
-        state.shelter=new Shelter();
+        state.drugstore=new Drugstore();
     },
-    getSheltersOk(state,data){
-        state.status={gotShelters:true}
-        state.shelters=data.shelters
-        state.totalShelters=data.totalShelters
+    getDrugstoresOk(state,data){
+        state.status={gotDrugstores:true}
+        state.drugstores=data.drugstores
+        state.totalDrugstores=data.totalDrugstores
     },
     getCitiesOk(state,data){
         state.cities=data
@@ -42,34 +42,34 @@ const mutations= {
         state.status={}
 
     },
-    editShelterOk(state,data){
-        state.shelter.idShelter=data.idShelter;
-        state.shelter.name=data.name;
-        state.shelter.lon=data.lon;
-        state.shelter.lat=data.lat;
-        state.shelter.idCity=data.idCity;
-        var index=state.shelters.findIndex(v => v.idShelter === data.idShelter);
-        state.shelters.splice(index, 1);        
+    editDrugstoreOk(state,data){
+        state.drugstore.idDrugstore=data.idDrugstore;
+        state.drugstore.name=data.name;
+        state.drugstore.lon=data.lon;
+        state.drugstore.lat=data.lat;
+        state.drugstore.idCity=data.idCity;
+        var index=state.drugstores.findIndex(v => v.idDrugstore === data.idDrugstore);
+        state.drugstores.splice(index, 1);        
         for(let city of state.cities){
             if(city.idCity==data.idCity){
                 data.nameCity=city.city
             }
         }
-        state.shelters.splice(index, 0, data);
+        state.drugstores.splice(index, 0, data);
     },
     
-    deleteShelterOk(state,data){
-        state.shelters.splice(state.shelters.findIndex(v => v.idShelter === data.idShelter), 1);
-        state.totalShelters--;
+    deleteDrugstoreOk(state,data){
+        state.drugstores.splice(state.drugstores.findIndex(v => v.idDrugstore === data.idDrugstore), 1);
+        state.totalDrugstores--;
     },
-    addShelterOk(state,data){
+    addDrugstoreOk(state,data){
         for(let city of state.cities){
             if(city.idCity==data.idCity){
                 data.nameCity=city.city
             }
         }
-        state.shelters.splice(0, 0, data);
-        state.totalShelters++;
+        state.drugstores.splice(0, 0, data);
+        state.totalDrugstores++;
     }
 
 };
@@ -86,13 +86,13 @@ const actions={
     dialogDeleteClose({ commit }){
         commit('dialogDeleteClose')
     },
-    getShelters({dispatch,commit},data){
-        commit("general/changeLoading",{type:true,label:"Obteniendo Albergues"},  { root: true });
-        shelterService.getShelters(data.n,data.i,data.search)
+    getDrugstores({dispatch,commit},data){
+        commit("general/changeLoading",{type:true,label:"Obteniendo Farmacias"},  { root: true });
+        drugstoreService.getDrugstores(data.n,data.i,data.search)
         .then(
             data => {
                 
-                commit('getSheltersOk', {shelters:data.shelters,totalShelters:data.total});
+                commit('getDrugstoresOk', {drugstores:data.drugstores,totalDrugstores:data.total});
                 commit("general/changeLoading",{type:false,label:""},  { root: true });
             },
             error => {
@@ -101,12 +101,12 @@ const actions={
             }
         );
     },
-    editShelter({dispatch,commit},shelter){
-        commit("general/changeLoading",{type:true,label:"Modificando Albergue"},  { root: true });
-        shelterService.editShelter(shelter)
+    editDrugstore({dispatch,commit},drugstore){
+        commit("general/changeLoading",{type:true,label:"Modificando Farmacia"},  { root: true });
+        drugstoreService.editDrugstore(drugstore)
         .then(
             () => {                
-                commit('editShelterOk', shelter);
+                commit('editDrugstoreOk', drugstore);
                 commit("general/changeLoading",{type:false,label:""},  { root: true });
             },
             error => {
@@ -115,13 +115,13 @@ const actions={
             }
         );
     },
-    addShelter({dispatch,commit},shelter){
-        commit("general/changeLoading",{type:true,label:"Agregando Albergue"},  { root: true });
-        shelterService.addShelter(shelter)
+    addDrugstore({dispatch,commit},drugstore){
+        commit("general/changeLoading",{type:true,label:"Agregando Farmacia"},  { root: true });
+        drugstoreService.addDrugstore(drugstore)
         .then(
             (id) => {          
-                shelter.idShelter=id;      
-                commit('addShelterOk', shelter);
+                drugstore.idDrugstore=id;      
+                commit('addDrugstoreOk', drugstore);
                 commit("general/changeLoading",{type:false,label:""},  { root: true });
             },
             error => {
@@ -130,12 +130,12 @@ const actions={
             }
         );
     },
-    deleteShelter({dispatch,commit},shelter){
-        commit("general/changeLoading",{type:true,label:"Eliminando Albergue"},  { root: true });
-        shelterService.deleteShelter(shelter)
+    deleteDrugstore({dispatch,commit},drugstore){
+        commit("general/changeLoading",{type:true,label:"Eliminando Farmacia"},  { root: true });
+        drugstoreService.deleteDrugstore(drugstore)
         .then(
             () => {              
-                commit('deleteShelterOk', shelter);
+                commit('deleteDrugstoreOk', drugstore);
                 commit("general/changeLoading",{type:false,label:""},  { root: true });
             },
             error => {
@@ -163,7 +163,7 @@ const actions={
 };
 
 
-export const viewShelters = {
+export const viewDrugstores = {
     namespaced: true,
     state,
     actions,

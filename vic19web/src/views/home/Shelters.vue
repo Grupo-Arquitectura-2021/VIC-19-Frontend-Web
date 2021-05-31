@@ -3,7 +3,7 @@
     <v-col cols="11" xl="10" lg="10">
     <v-row><br></v-row>
     <v-row  class="header-container">
-      <v-col cols="12" lg="3" sm="4" md="4" xl="3" >
+      <v-col cols="12" lg="4" sm="5" md="4" xl="3" >
         <input-search
         :label="'Buscar Albergue'"
         v-bind:value="search"
@@ -14,7 +14,7 @@
         >
         </input-search>
       </v-col>
-      <v-col cols="12" lg="3" sm="4" md="4" xl="3" >
+      <v-col cols="12" lg="3" sm="5" md="4" xl="3" >
         <v-btn class="button-add" v-on:click="addShelter">
         <v-icon>mdi-plus</v-icon>Agregar Albergue</v-btn>
       </v-col>
@@ -57,8 +57,9 @@ export default {
           { text: 'Id', value: 'idShelter',class:"item-header-left"},
           { text: 'Ciudad', value: 'nameCity' ,class:"item-header-center"},
           { text: 'Nombre', value: 'name' ,class:"item-header-center"},
+          { text: 'Capacidad', value: 'amount' ,class:"item-header-center"},
           { text: 'Latitud', value: 'lat' ,class:"item-header-center"},
-          {text: 'Longitud', value: 'lon' ,class:"item-header-right"},
+          {text: 'Longitud', value: 'lon' ,class:"item-header-center"},
           {text: 'Acciones', value: 'actions' ,class:"item-header-right"}
           ],
     items:[],
@@ -82,7 +83,7 @@ export default {
         for(let s of this.shelters){
           this.citiesData.find((city)=>{
             if(city.idCity==s.idCity){
-              h.nameCity=city.city;
+              s.nameCity=city.city;
             }
         })
         }
@@ -122,3 +123,5 @@ export default {
 @import "@/styles/components/_buttons.sass"
 
 </style>
+
+

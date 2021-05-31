@@ -21,8 +21,8 @@
                     lg="6"
                   >
                     <input-general
-                    v-bind:value="shelterEdit.name"
-                    v-on:input="shelterEdit.name = $event"   
+                    v-bind:value="drugstoreEdit.name"
+                    v-on:input="drugstoreEdit.name = $event"   
                     :icon="'mdi-pencil'"
                     :label="'Nombre'"
                     :lim="'6'"
@@ -36,23 +36,8 @@
                     lg="6"
                   >
                   <input-general                  
-                    v-bind:value="shelterEdit.amount"
-                    v-on:input="shelterEdit.amount = $event"   
-                    :icon="'mdi-pencil'"
-                    :label="'Capacidad'"
-                    :lim="'6'"
-                    :rules="[rules.Required]"
-                    ></input-general>
-                  </v-col>
-                  <v-col
-                    cols="12"
-                    sm="6"
-                    md="4"
-                    lg="6"
-                  >
-                  <input-general                  
-                    v-bind:value="shelterEdit.lon"
-                    v-on:input="shelterEdit.lon = $event"   
+                    v-bind:value="drugstoreEdit.lon"
+                    v-on:input="drugstoreEdit.lon = $event"   
                     :icon="'mdi-map-marker'"
                     :label="'Longitud'"
                     :lim="'6'"
@@ -65,10 +50,9 @@
                     md="4"
                     lg="6"
                   >
-                  
                   <input-general                  
-                    v-bind:value="shelterEdit.lat"
-                    v-on:input="shelterEdit.lat = $event"   
+                    v-bind:value="drugstoreEdit.lat"
+                    v-on:input="drugstoreEdit.lat = $event"   
                     :icon="'mdi-map-marker'"
                     :label="'Latitud'"
                     :lim="'6'"
@@ -84,8 +68,8 @@
                   <select-general 
                   :items="cities"
                   :label="'Ciudad'"
-                    v-bind:value="shelterEdit.idCity"
-                    v-on:input="shelterEdit.idCity = $event"  
+                    v-bind:value="drugstoreEdit.idCity"
+                    v-on:input="drugstoreEdit.idCity = $event"  
                   ></select-general>
                   </v-col>
                 </v-row>
@@ -116,7 +100,7 @@
 </template>
 <script>
 import { mapState,mapActions} from 'vuex'
-import Shelter from '../../models/Shelter'
+import Drugstore from '../../models/Drugstore'
 import InputGeneral from '../inputs/InputGeneral.vue';
 import SelectGeneral from '../inputs/selectGeneral.vue';
 
@@ -126,7 +110,7 @@ export default {
     },
     data:()=>({        
         active:true,
-        shelterEdit:{},
+        drugstoreEdit:{},
         rules: {
             Required: (value) =>
                 !!value || "Complete el campo por favor."
@@ -134,30 +118,32 @@ export default {
     }),
   
     computed: {
-        ...mapState('viewShelters', ['dialogEditState','shelter','title','cities'])
+        ...mapState('viewDrugstores', ['dialogEditState','drugstore','title','cities'])
     },
     watch:{
-      shelter(value){
-        this.shelterEdit=new Shelter(value.idShelter,value.amount,value.idCity,value.name,value.lon,value.lat);
+      drugstore(value){
+        this.drugstoreEdit=new Drugstore(value.idDrugstore,value.idCity,value.name,value.lon,value.lat);
         
       }
     },
+    
     mounted(){
     },
     methods:{
-    ...mapActions('viewShelters', ['dialogEditClose','dialogDelete','editShelter','addShelter']),
+    ...mapActions('viewDrugstores', ['dialogEditClose','dialogDelete','editDrugstore','addDrugstore']),
       cancel(){
         this.dialogEditClose();
       },  
       save(){
+        console.log(this.title);
         switch(this.title){
-          case "Editar Albergue":
+          case "Editar Farmacia":
             this.dialogEditClose();
-            this.editShelter(this.shelterEdit);
+            this.editDrugstore(this.drugstoreEdit);
             break;
-          case "Agregar Albergue":
+          case "Agregar Farmacia":
              this.dialogEditClose();   
-            this.addShelter(this.shelterEdit);
+            this.addDrugstore(this.drugstoreEdit);
             break;  
         }
       }
@@ -167,4 +153,3 @@ export default {
 <style lang="sass">
 @import "@/styles/dialogs/_editDialog.sass"    
 </style>
-

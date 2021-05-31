@@ -48,11 +48,14 @@ const mutations= {
         state.hospital.lon=data.lon;
         state.hospital.lat=data.lat;
         state.hospital.idCity=data.idCity;
+        var index=state.hospitals.findIndex(v => v.idHospital === data.idHospital);
+        state.hospitals.splice(index, 1);        
         for(let city of state.cities){
             if(city.idCity==data.idCity){
-                state.hospital.nameCity=city.city
+                data.nameCity=city.city
             }
         }
+        state.hospitals.splice(index, 0, data);
     },
     
     deleteHospitalOk(state,data){

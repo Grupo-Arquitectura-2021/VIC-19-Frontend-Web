@@ -8,11 +8,11 @@
         <v-card
           class="dialog-container">
             <v-card-title>
-              <span class="headline">Eliminar Albergue</span>
+              <span class="headline">Eliminar Cuenta</span>
             </v-card-title>
 
             <v-card-text>
-              Esta seguro que desea eliminar el albergue "{{shelter.name}}"
+              Esta seguro que desea eliminar la cuenta "{{account.userName}}"
             </v-card-text>
 
             <v-card-actions>
@@ -39,7 +39,7 @@
 </template>
 <script>
 import { mapState,mapActions} from 'vuex'
-import Shelter from '../../models/Shelter';
+import Account from '../../models/Account';
 
 
 export default {
@@ -47,28 +47,27 @@ export default {
     },
     data:()=>({       
         accountEdit:{},
-        shelterEdit:{},
     }),
   
     computed: {
-        ...mapState('viewShelters', ['dialogDeleteState','shelter'])
+        ...mapState('viewAccounts', ['dialogDeleteState','account'])
     },
     mounted(){
     },
     watch:{
-      shelter(value){
-        this.shelterEdit=new Shelter(value.idShelter,value.amount,value.idCity,value.name,value.lon,value.lat);
+      account(value){
+        this.accountEdit=new Account(value.idUser,value.userName);
         
       }
     },
     methods:{
-    ...mapActions('viewShelters', ['dialogDeleteClose','deleteShelter']),
+    ...mapActions('viewAccounts', ['dialogDeleteClose','deleteAccount']),
       cancel(){
         this.dialogDeleteClose();
       },  
       save(){
         this.dialogDeleteClose();
-        this.deleteShelter(this.shelterEdit)}
+        this.deleteAccount(this.accountEdit)}
     }
 }
 </script>

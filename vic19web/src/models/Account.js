@@ -1,23 +1,27 @@
 export default class Account
 {
-    id;
-    name;
+    idUser;
+    userName;
     lastName;
     email;
-    constructor(id,name,lastname,email){
-        this.id=id;
-        this.name=name;
+    password;
+    constructor(idUser,userName,lastname,email,password){
+        this.idUser=idUser;
+        this.userName=userName;
         this.lastName=lastname;
         this.email=email;
+        this.password=password;
     }
     toJson(){
         return JSON.stringify(this);
     }
     fromJson(json){
-        this.id=json.id;
-        this.name=json.name;
+        this.idUser=json.idUser;
+        this.userName=json.userName;
         this.lastName=json.lastName;
         this.email=json.email;
+        this.password=json.password;
+        return this;
     }
 
     

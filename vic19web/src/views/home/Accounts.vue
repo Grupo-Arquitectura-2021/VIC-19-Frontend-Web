@@ -1,8 +1,20 @@
 <template>
-  <v-container>
+  <v-row class="main-container" no-gutters>
+    <v-col cols="11" xl="10" lg="10">
     <v-row><br></v-row>
     <v-row  class="header-container">
-      <v-col cols="12" lg="3" sm="4" md="4" xl="3" >
+      <v-col cols="12" lg="4" sm="5" md="4" xl="3" >
+        <input-search
+        :label="'Buscar Cuenta'"
+        v-bind:value="search"
+        v-on:input="search = $event"   
+        @keyup.enter.native="searchData"  
+
+        
+        >
+        </input-search>
+      </v-col>
+      <v-col cols="12" lg="3" sm="5" md="4" xl="3" >
         <v-btn class="button-add" v-on:click="addAccount">
         <v-icon>mdi-plus</v-icon>Agregar Cuenta</v-btn>
       </v-col>
@@ -11,45 +23,65 @@
       <v-col cols="12">
         <Table :headers="headers"
         :items="items"  
+        :total="totalAccounts"
         @editValue="editAccount($event)"
         @deleteValue="deleteAccount($event)"
+        @changePage="changePage($event)"
         >
 
       </Table>
       </v-col>
     </v-row>
-    <edit-account-dialog :active="activeEdit"></edit-account-dialog>
-  </v-container>
+     <edit-account-dialog ></edit-account-dialog>
+     <delete-account-dialog></delete-account-dialog>
+  </v-col>
+  </v-row>
 </template>
 
 <script>
 import Table from '../../components/views-components/Table.vue';
-import { mapActions } from 'vuex'
+import { mapActions,mapState } from 'vuex'
 import Account from '../../models/Account'
+import InputSearch from '../../components/inputs/InputSearch.vue';
 import EditAccountDialog from '../../components/dialogs/EditAccountDialog.vue';
+import DeleteAccountDialog from '../../components/dialogs/DeleteAccountDialog';
 export default {
   components: {
     Table,
-    EditAccountDialog 
+    InputSearch,
+    EditAccountDialog,
+    DeleteAccountDialog
   },
   data:()=>({
     headers:[
-          { text: 'Id', value: 'id',class:"item-header-left"},
-          { text: 'Nombre', value: 'name' ,class:"item-header-center"},
+          { text: 'IdUser', value: 'idUser',class:"item-header-left"},
+          { text: 'Nombre', value: 'userName' ,class:"item-header-center"},
           { text: 'Apellido', value: 'lastName' ,class:"item-header-center"},
           { text: 'Email', value: 'email' ,class:"item-header-center"},
           {text: 'Acciones', value: 'actions' ,class:"item-header-right"}
           ],
     items:[],
-    activeEdit:false
+    activeEdit:false,
+    search:"",
   }),
-  mounted(){
-    this.obtainData()
+  created(){
+    this.getAccounts({n:10,i:0});
   },
+  mounted(){
+  },
+    computed: {
+        ...mapState('viewAccounts', ['accounts','totalAccounts','account']),
+    },
+    
+    watch:{
+      accounts(value){
+        this.items=value;
+      },
+    },
   methods:{
-    ...mapActions('viewAccounts', ['dialogEditOpen','dialogDelete']),
+    ...mapActions('viewAccounts', ['dialogEditOpen','dialogDeleteOpen','getAccounts']),
     deleteAccount(account){
-      console.log(account);
+      this.dialogDeleteOpen(account)
     },
     addAccount(){
       this.dialogEditOpen({account:new Account(),title:"Agregar Cuenta"})
@@ -59,12 +91,11 @@ export default {
       this.dialogEditOpen({account:account,title:"Editar Cuenta"})
 
     },
-    obtainData(){
-      var data=[];
-      for(let i=0;i<10;i++){
-        data.push(new Account(i,"Alvin Jamil","Poma Tarqui","pomaalvin@gmail.com"));
-      }
-      this.items=data;
+    changePage(page){
+      this.getAccounts({n:10,i:10*page});
+    },
+    searchData(){
+      this.getAccounts({n:10,i:0,search:this.search});
     }
   }
 

@@ -150,5 +150,5 @@ export default {
 }
 </script>
 <style lang="sass">
-@import "@/styles/dialogs/_editAccountDialog.sass"    
+@import "@/styles/dialogs/_editDialog.sass"    
 </style>

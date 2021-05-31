@@ -1,10 +1,10 @@
 <template>
       <div>
         <v-row no-gutters>
-            <v-col cols="2" class="icon-card">
+            <div class="icon-container">
                 <v-icon class=" icon" >mdi-magnify</v-icon>        
-            </v-col>
-            <v-col cols="10">
+            </div>
+            <v-col>
               <div class="input">
                 <v-text-field
                 dense

@@ -1,7 +1,8 @@
 import { accountService} from '../services';
 import router from '../router';
-const token = JSON.parse(localStorage.getItem('token'));
-const user = JSON.parse(localStorage.getItem('user'));
+import {tokenLib} from '../lib/token.lib'
+const token = localStorage.getItem('token');
+const user = localStorage.getItem('user');
 const state={
   status: token?{loggedIn:true}:{},
   user: user?user:{},
@@ -18,20 +19,25 @@ const mutations= {
 };
 const actions={
     login({ dispatch, commit}, loginRequest) {
-        commit("general/changeLoading",{type:true,title:"Iniciando Sesión"});
+        commit("general/changeLoading",{type:true,label:"Iniciando Sesión"},  { root: true });
         accountService.login(loginRequest)
             .then(
                 user => {
-
                     commit('loginSuccess', user);
+                    commit("general/changeLoading",{type:false,label:""},  { root: true });
                     router.push('/home');
                 },
                 error => {
                     commit('loginFailure', error);
                     dispatch('alert/error', error, { root: true });
+                    commit("general/changeLoading",{type:false,label:""},  { root: true });
                 }
             );
     },
+    logout(){
+        tokenLib.removeTokens();
+        location.reload();
+    }
 };
 
 

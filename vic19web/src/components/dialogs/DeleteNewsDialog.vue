@@ -8,11 +8,11 @@
         <v-card
           class="dialog-container">
             <v-card-title>
-              <span class="headline">Eliminar Albergue</span>
+              <span class="headline">Eliminar Noticia</span>
             </v-card-title>
 
             <v-card-text>
-              Esta seguro que desea eliminar el albergue "{{shelter.name}}"
+              Esta seguro que desea eliminar la noticia "{{news.idNews}}"
             </v-card-text>
 
             <v-card-actions>
@@ -39,7 +39,7 @@
 </template>
 <script>
 import { mapState,mapActions} from 'vuex'
-import Shelter from '../../models/Shelter';
+import News from '../../models/News';
 
 
 export default {
@@ -47,28 +47,28 @@ export default {
     },
     data:()=>({       
         accountEdit:{},
-        shelterEdit:{},
+        newsEdit:{},
     }),
   
     computed: {
-        ...mapState('viewShelters', ['dialogDeleteState','shelter'])
+        ...mapState('viewNewsList', ['dialogDeleteState','news'])
     },
     mounted(){
     },
     watch:{
-      shelter(value){
-        this.shelterEdit=new Shelter(value.idShelter,value.amount,value.idCity,value.name,value.lon,value.lat);
+      news(value){
+        this.newsEdit=new News(value.idNews,value.title,value.content,value.dateNews,value.newsImages,value.newsUrl);
         
       }
     },
     methods:{
-    ...mapActions('viewShelters', ['dialogDeleteClose','deleteShelter']),
+    ...mapActions('viewNewsList', ['dialogDeleteClose','deleteNews']),
       cancel(){
         this.dialogDeleteClose();
       },  
       save(){
         this.dialogDeleteClose();
-        this.deleteShelter(this.shelterEdit)}
+        this.deleteNews(this.newsEdit)}
     }
 }
 </script>

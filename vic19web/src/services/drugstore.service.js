@@ -1,33 +1,33 @@
 import {apiUrl} from '../config/config';
 import axios from 'axios'
-import Hospital from '../models/Hospital'
-export const hospitalService = {
-    getHospitals,
-    editHospital,
-    addHospital,
-    deleteHospital
+import Drugstore from '../models/Drugstore'
+export const drugstoreService = {
+    getDrugstores,
+    editDrugstore,
+    addDrugstore,
+    deleteDrugstore
 };
-async function getHospitals(n,i,search) {
+async function getDrugstores(n,i,search) {
     var complement="";
     if(search==null||search==""||search==undefined)
     complement=`n=${n}&i=${i}`
     else
     complement=`n=${n}&i=${i}&search=${search}`
     return axios({
-        url: `${apiUrl}hospital/allInfo?`+complement, 
+        url: `${apiUrl}drugstore?`+complement, 
         method: "GET",
         headers: { "Content-Type": 'application/json' },
         
       })
         .then(data => {
             if(data.status==200){
-                var hospitals=[];
-                for(var h of data.data.hospitals){               
-                    var hospital=new Hospital().fromJson(h);
-                    hospitals.push(hospital);
+                var drugstores=[];
+                for(var d of data.data.drugstores){               
+                    var drugstore=new Drugstore().fromJson(d);
+                    drugstores.push(drugstore);
                 }
 
-                return {hospitals:hospitals,total:data.data.total};
+                return {drugstores:drugstores,total:data.data.total};
             }
             else{
                 throw "error";
@@ -35,11 +35,11 @@ async function getHospitals(n,i,search) {
         }).catch(()=>{
             throw "error";});
 }
-async function editHospital(hospital) {
+async function editDrugstore(drugstore) {
     return axios({
-        url: `${apiUrl}hospital`,
+        url: `${apiUrl}drugstore`,
         method: "PUT",
-        data:hospital.toJson(),
+        data:drugstore.toJson(),
         headers: { "Content-Type": 'application/json' },
         
       })
@@ -52,30 +52,30 @@ async function editHospital(hospital) {
             }
         }).catch(()=>{return null});
 }
-async function addHospital(hospital) {
+async function addDrugstore(drugstore) {
     return axios({
-        url: `${apiUrl}hospital`,
+        url: `${apiUrl}drugstore`,
         method: "POST",
-        data:hospital.toJson(),
+        data:drugstore.toJson(),
         headers: { "Content-Type": 'application/json' },
         
       })
         .then(data => {
             if(data.status==200){
-                return data.data.idHospital;
+                return data.data.idDrugstore;
             }
             else{
                 return null;
             }
         }).catch(()=>{return null});
 }
-async function deleteHospital(hospital) {
+async function deleteDrugstore(drugstore) {
+    var complement = "";
+    complement= `drugstoreId=${drugstore.idDrugstore}`
     return axios({
-        url: `${apiUrl}hospital`,
-        method: "DELETE"
-        ,params:{
-            hospitalId:hospital.idHospital
-        },
+        url: `${apiUrl}drugstore?`+complement,
+        method: "DELETE",
+        data:drugstore.toJson(),
         headers: { "Content-Type": 'application/json' },
         
       })

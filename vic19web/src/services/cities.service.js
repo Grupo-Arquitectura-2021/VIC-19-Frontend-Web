@@ -4,11 +4,7 @@ import City from '../models/City'
 export const citiesService = {
     getCities
 };
-async function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-  }
 async function getCities() {
-    await sleep(2000);
     return axios({
         url: `${apiUrl}city`, 
         method: "GET",
@@ -26,7 +22,8 @@ async function getCities() {
                 return cities;
             }
             else{
-                return null;
+                throw "error";
             }
-        }).catch(()=>{return null});
+        }).catch(()=>{
+            throw "error";});
 }

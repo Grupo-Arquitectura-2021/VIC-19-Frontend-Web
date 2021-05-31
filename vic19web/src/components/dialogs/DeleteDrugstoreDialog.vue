@@ -8,11 +8,11 @@
         <v-card
           class="dialog-container">
             <v-card-title>
-              <span class="headline">Eliminar Albergue</span>
+              <span class="headline">Eliminar Farmacia</span>
             </v-card-title>
 
             <v-card-text>
-              Esta seguro que desea eliminar el albergue "{{shelter.name}}"
+              Esta seguro que desea eliminar la farmacia "{{drugstore.name}}"
             </v-card-text>
 
             <v-card-actions>
@@ -39,36 +39,39 @@
 </template>
 <script>
 import { mapState,mapActions} from 'vuex'
-import Shelter from '../../models/Shelter';
+import Drugstore from '../../models/Drugstore';
 
 
 export default {
     props:{
     },
+    
     data:()=>({       
         accountEdit:{},
-        shelterEdit:{},
+        drugstoreEdit:{},
     }),
   
     computed: {
-        ...mapState('viewShelters', ['dialogDeleteState','shelter'])
+        ...mapState('viewDrugstores', ['dialogDeleteState','drugstore'])
     },
     mounted(){
     },
+    
     watch:{
-      shelter(value){
-        this.shelterEdit=new Shelter(value.idShelter,value.amount,value.idCity,value.name,value.lon,value.lat);
+      drugstore(value){
+        this.drugstoreEdit=new Drugstore(value.idDrugstore,value.idCity,value.name,value.lon,value.lat);
         
       }
     },
+
     methods:{
-    ...mapActions('viewShelters', ['dialogDeleteClose','deleteShelter']),
+    ...mapActions('viewDrugstores', ['dialogDeleteClose','deleteDrugstore']),
       cancel(){
         this.dialogDeleteClose();
       },  
       save(){
         this.dialogDeleteClose();
-        this.deleteShelter(this.shelterEdit)}
+        this.deleteDrugstore(this.drugstoreEdit)}
     }
 }
 </script>
