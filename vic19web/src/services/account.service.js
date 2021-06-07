@@ -9,13 +9,14 @@ export const accountService = {
     getAccounts
 };
 async function login(loginRequest) {
-    return axios({
+    var a=axios({
         url: `${apiUrl}oauth/token`, 
         params:loginRequest.toJson(),
         method: "POST",
-        headers: { 'content-type': 'application/x-www-form-urlencoded;charset=utf-8' ,"Authorization":'Basic Y292aWQxOXByb3llY3Q6Y292aWQxOXByb3llY3QxMjM0NQ=='},
-        
-      })
+        headers: { 'content-type': 'application/x-www-form-urlencoded;charset=utf-8' ,"Authorization":'Basic Y292aWQxOXByb3llY3Q6Y292aWQxOXByb3llY3QxMjM0NQ=='}
+      });
+    console.log(a)
+    return a 
         .then(data => {
             console.log(data);
             if(data.status==200){

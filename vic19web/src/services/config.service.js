@@ -6,6 +6,7 @@ axios.interceptors.request.use(function(config) {
     if(token&&config.url!=`${apiUrl}oauth/token`) {
       config.headers.Authorization = `Bearer ${token}`;
     }
+    console.log(config);
     return config;
 }, function(err) {
     return Promise.reject(err);
